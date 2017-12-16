@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Please see https://developer.riotgames.com -->
+    <string name="api_key_rito">PUT YOUR API KEY HERE</string>
+    <!-- Please see http://api.champion.gg/docs -->
+    <string name="api_key_champion">PUT YOUR API KEY HERE</string>
+</resources>
