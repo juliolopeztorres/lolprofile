@@ -1,8 +1,12 @@
 package oob.lolprofile.HomeComponent.Framework;
 
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -42,6 +46,9 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
     @BindView(R.id.imageViewSadFace)
     ImageView imageViewSadFace;
 
+    @BindView(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+
     @Inject
     GetAllChampionsUseCase getAllChampionsUseCase;
 
@@ -53,6 +60,7 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
 
         this.toolbar.setTitle(getString(R.string.activity_home_title));
         this.setSupportActionBar(this.toolbar);
+        this.setHomeButton();
 
         this.component = DaggerHomeActivityComponentInterface.builder()
                 .baseApplicationComponentInterface(((BaseApplication) this.getApplication()).getComponent())
@@ -67,6 +75,23 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
         this.component.inject(this);
 
         this.getAllChampionsUseCase.getAll();
+    }
+
+    private void setHomeButton() {
+        ActionBar actionBar = this.getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_home);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.drawerLayout.openDrawer(Gravity.START);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
