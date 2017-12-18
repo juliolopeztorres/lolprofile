@@ -2,5 +2,13 @@
     <string name="app_name">LoLProfile</string>
     <string name="cache_name">CacheLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
-    <string name="base_url_rito">https://euw1.api.riotgames.com/lol/static-data/v3/</string>
+    <!--string name="base_url_rito">https://euw1.api.riotgames.com/lol/static-data/v3/</string-->
+    <string name="base_url_rito">http://www.mocky.io/v2/</string>
+    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/%s</string>
+
+    <!-- TOOLBAR -->
+    <string name="toolbarElevation">4dp</string>
+    <string name="content_description_champion_image_placeholder">Champion\'s placeholder image</string>
+    <string name="content_description_sad_face">An error has occurred :(</string>
+    <string name="activity_home_title">Details</string>
 </resources>
