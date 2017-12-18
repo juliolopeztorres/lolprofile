@@ -1,12 +1,17 @@
 package oob.lolprofile.ApplicationComponent.DependencyInjection;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+
 import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import oob.lolprofile.HomeComponent.Data.Mapper.ChampionResponseMapper;
+import oob.lolprofile.HomeComponent.Domain.Model.Champion;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,7 +28,12 @@ public class ClientRitoModule {
     @Named("clientRito")
     Retrofit provideRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(
+                        GsonConverterFactory.create(
+                                new GsonBuilder().registerTypeAdapter(new TypeToken<ArrayList<Champion>>() {
+                                }.getType(), new ChampionResponseMapper()).create()
+                        )
+                )
                 .baseUrl(this.baseUrl)
                 .client(client)
                 .build();
