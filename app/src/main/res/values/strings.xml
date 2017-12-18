@@ -11,6 +11,10 @@
     <string name="toolbarElevation">4dp</string>
     <string name="content_description_champion_image_placeholder">Champion\'s placeholder image</string>
     <string name="content_description_sad_face">An error has occurred :(</string>
-    <string name="activity_home_title">Details</string>
+    <string name="activity_home_title">Champions</string>
     <string name="key_seconds_last_request">UnixSecondsLastRequest</string>
+    <string name="contentDescriptionBackground">Nice LoL related background image</string>
+    <string name="menu_champions_label">Champions</string>
+    <string name="menu_summoner_label">Summoner</string>
+    <string name="menu_option_label">Options</string>
 </resources>
