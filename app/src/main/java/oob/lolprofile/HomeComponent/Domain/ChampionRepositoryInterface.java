@@ -7,6 +7,12 @@ import oob.lolprofile.HomeComponent.Domain.Model.Champion;
 public interface ChampionRepositoryInterface {
     void getAll(ChampionCallback callback);
 
+    void removeAll();
+
+    int getSecondsLastRequest();
+
+    void setSecondsLastRequest(int secondsCurrent);
+
     interface ChampionCallback {
         void onSuccess(ArrayList<Champion> champions);
 

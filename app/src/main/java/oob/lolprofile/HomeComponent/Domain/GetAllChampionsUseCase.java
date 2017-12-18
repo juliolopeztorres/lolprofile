@@ -14,7 +14,16 @@ public class GetAllChampionsUseCase implements ChampionRepositoryInterface.Champ
     }
 
     public void getAll() {
+        checkRemoveChampionsSaved();
         this.championRepositoryInterface.getAll(this);
+    }
+
+    private void checkRemoveChampionsSaved() {
+        int secondsCurrent = (int) (System.currentTimeMillis() / 1000L);
+        if (secondsCurrent - this.championRepositoryInterface.getSecondsLastRequest() > 86400) {
+            this.championRepositoryInterface.removeAll();
+            this.championRepositoryInterface.setSecondsLastRequest(secondsCurrent);
+        }
     }
 
     @Override
