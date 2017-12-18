@@ -56,7 +56,13 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
 
         this.component = DaggerHomeActivityComponentInterface.builder()
                 .baseApplicationComponentInterface(((BaseApplication) this.getApplication()).getComponent())
-                .homeActivityModule(new HomeActivityModule(this, Locale.getDefault().toString(), getString(R.string.api_key_rito)))
+                .homeActivityModule(
+                        new HomeActivityModule(
+                                this,
+                                Locale.getDefault().toString(),
+                                getString(R.string.api_key_rito),
+                                getString(R.string.key_seconds_last_request)
+                        ))
                 .build();
         this.component.inject(this);
 
