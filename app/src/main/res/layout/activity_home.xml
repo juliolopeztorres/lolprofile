@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="oob.lolprofile.HomeComponent.Framework.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <include android:id="@+id/toolbar" layout="@layout/toolbar" />
 
-</LinearLayout>
+    <ProgressBar
+        android:layout_below="@id/toolbar"
+        android:id="@+id/progressBarChampionsResume"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        />
+
+    <GridView
+        android:layout_below="@id/toolbar"
+        android:id="@+id/gridViewChampions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewSadFace"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/content_description_sad_face"
+        android:layout_below="@id/toolbar"
+        android:src="@drawable/sad_face"
+        android:alpha="0.1"
+        android:visibility="gone"
+        />
+</RelativeLayout>
