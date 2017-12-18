@@ -4,8 +4,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
@@ -30,7 +32,7 @@ import oob.lolprofile.HomeComponent.Framework.DependencyInjection.HomeActivityCo
 import oob.lolprofile.HomeComponent.Framework.DependencyInjection.HomeActivityModule;
 import oob.lolprofile.R;
 
-public class HomeActivity extends AppCompatActivity implements ViewInterface {
+public class HomeActivity extends AppCompatActivity implements ViewInterface, SearchView.OnQueryTextListener {
 
     HomeActivityComponentInterface component;
 
@@ -51,6 +53,8 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
 
     @Inject
     GetAllChampionsUseCase getAllChampionsUseCase;
+
+    ChampionAdapter championAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,16 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView viewSearch = (SearchView) menuItem.getActionView();
+        viewSearch.setOnQueryTextListener(this);
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             this.drawerLayout.openDrawer(Gravity.START);
@@ -96,12 +110,11 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
 
     @Override
     public void showChampions(ArrayList<Champion> champions) {
-        ChampionAdapter championAdapter = new ChampionAdapter(this, champions, R.layout.grid_champion_item);
-        this.gridView.setAdapter(championAdapter);
+        this.championAdapter = new ChampionAdapter(this, champions, R.layout.grid_champion_item);
+        this.gridView.setAdapter(this.championAdapter);
         this.progressBar.setVisibility(View.GONE);
         this.imageViewSadFace.setVisibility(View.GONE);
         this.gridView.setVisibility(View.VISIBLE);
-
     }
 
     @Override
@@ -109,5 +122,16 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         this.progressBar.setVisibility(View.GONE);
         this.imageViewSadFace.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String champName) {
+        this.championAdapter.filterByName(champName);
+        return true;
     }
 }

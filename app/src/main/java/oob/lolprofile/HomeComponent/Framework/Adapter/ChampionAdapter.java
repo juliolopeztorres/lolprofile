@@ -1,6 +1,7 @@
 package oob.lolprofile.HomeComponent.Framework.Adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,23 +17,24 @@ import oob.lolprofile.R;
 
 public class ChampionAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Champion> champions;
+    private ArrayList<Champion> champions, championsFiltered;
     private int layout;
 
-    public ChampionAdapter(Context context, ArrayList<Champion> champions, int layout) {
+    public ChampionAdapter(Context context, final ArrayList<Champion> champions, int layout) {
         this.context = context;
         this.champions = champions;
+        this.championsFiltered = new ArrayList<Champion>() {{ addAll(champions); }};
         this.layout = layout;
     }
 
     @Override
     public int getCount() {
-        return this.champions.size();
+        return this.championsFiltered.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return this.champions.get(i);
+        return this.championsFiltered.get(i);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class ChampionAdapter extends BaseAdapter {
 
         ChampionViewHolder championViewHolder = (ChampionViewHolder) view.getTag();
 
-        Champion champion = this.champions.get(i);
+        Champion champion = this.championsFiltered.get(i);
 
         Picasso.with(this.context)
                 .load(String.format(this.context.getString(R.string.base_url_champion_image), champion.getImage()))
@@ -70,5 +72,21 @@ public class ChampionAdapter extends BaseAdapter {
     private ChampionViewHolder createViewHolder(View view) {
         return (new ChampionViewHolder())
                 .setChampionAvatar((RoundedImageView) view.findViewById(R.id.roundImageViewChampionAvatar));
+    }
+
+    public void filterByName(String champName) {
+        this.championsFiltered.clear();
+
+        if (TextUtils.isEmpty(champName)) {
+            this.championsFiltered.addAll(this.champions);
+        } else {
+            for(Champion champion: this.champions) {
+                if (champion.getName().toLowerCase().contains(champName.toLowerCase())) {
+                    this.championsFiltered.add(champion);
+                }
+            }
+        }
+
+        this.notifyDataSetChanged();
     }
 }
