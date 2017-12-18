@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
-public interface ChampionClientInterface {
+public interface ChampionClientServiceInterface {
     String CONTENT_TYPE = "Content-Type: application/json";
     String ACCEPT = "Accept: application/json";
 

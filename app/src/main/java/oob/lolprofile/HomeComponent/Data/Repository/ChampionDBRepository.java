@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Data;
+package oob.lolprofile.HomeComponent.Data.Repository;
 
 import android.support.annotation.NonNull;
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
+import oob.lolprofile.HomeComponent.Data.NoChampionsFoundDBException;
 
 public class ChampionDBRepository {
     private Realm realm;
