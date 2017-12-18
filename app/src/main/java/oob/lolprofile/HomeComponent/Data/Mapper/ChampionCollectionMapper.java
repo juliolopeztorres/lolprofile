@@ -6,9 +6,11 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Map;
 
+import io.realm.RealmResults;
+import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
 import oob.lolprofile.HomeComponent.Domain.Model.Champion;
 
-class ChampionCollectionMapper {
+public class ChampionCollectionMapper {
     static ArrayList<Champion> parseChampionsResponse(JsonObject ritoChampionResponse) {
         ArrayList<Champion> champions = new ArrayList<>();
 
@@ -17,5 +19,25 @@ class ChampionCollectionMapper {
         }
 
         return champions;
+    }
+
+    public static ArrayList<Champion> parseChampionsRealmResponse(RealmResults<ChampionRow> championRows) {
+        ArrayList<Champion> champions = new ArrayList<>();
+
+        for (ChampionRow championRow : championRows) {
+            champions.add(ChampionMapper.parseChampionRealmResponse(championRow));
+        }
+
+        return champions;
+    }
+
+    public static ArrayList<ChampionRow> parseChampionsToRealm(ArrayList<Champion> champions) {
+        ArrayList<ChampionRow> championRows = new ArrayList<>();
+
+        for (Champion champion: champions) {
+            championRows.add(ChampionMapper.parseChampionToRealm(champion));
+        }
+
+        return championRows;
     }
 }
