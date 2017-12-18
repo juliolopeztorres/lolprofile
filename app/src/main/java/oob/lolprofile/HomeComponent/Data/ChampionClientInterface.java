@@ -13,8 +13,9 @@ public interface ChampionClientInterface {
     String ACCEPT = "Accept: application/json";
 
     @Headers({CONTENT_TYPE, ACCEPT})
-    // @GET("champions")
-    @GET("5a377e022f0000dc32127c2a")
+    @GET("champions")
+    // SEE https://www.mocky.io/ for below
+    // @GET("5a37b8f53200005f13eb6a79")
     Call<ArrayList<Champion>> getAll(
             @Query("locale") String locale,
             @Query("dataById") boolean dataById,
