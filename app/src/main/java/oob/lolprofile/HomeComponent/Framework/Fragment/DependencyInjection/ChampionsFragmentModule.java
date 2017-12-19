@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.DependencyInjection;
+package oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection;
 
 import android.content.SharedPreferences;
 
@@ -17,13 +17,13 @@ import oob.lolprofile.HomeComponent.Domain.ViewInterface;
 import retrofit2.Retrofit;
 
 @Module
-public class HomeActivityModule {
+public class ChampionsFragmentModule {
     private ViewInterface view;
     private String locale;
     private String apiKey;
     private String keySecondsLastRequest;
 
-    public HomeActivityModule(ViewInterface view, String locale, String apiKey, String keySecondsLastRequest) {
+    public ChampionsFragmentModule(ViewInterface view, String locale, String apiKey, String keySecondsLastRequest) {
         this.view = view;
         this.locale = locale;
         this.apiKey = apiKey;
@@ -31,7 +31,7 @@ public class HomeActivityModule {
     }
 
     @Provides
-    @HomeActivityScopeInterface
+    @ChampionsFragmentScopeInterface
     GetAllChampionsUseCase provideGetAllChampionsUseCase(@Named("championRepository") ChampionRepositoryInterface championRepositoryInterface) {
         return new GetAllChampionsUseCase(
                 this.view,
@@ -40,7 +40,7 @@ public class HomeActivityModule {
     }
 
     @Provides
-    @HomeActivityScopeInterface
+    @ChampionsFragmentScopeInterface
     @Named("championRepository")
     ChampionRepositoryInterface provideChampionRepositoryInterface(ChampionClientServiceInterface championClientInterface, ChampionDBRepository championDBRepository, SharedPreferences sharedPreferences) {
         return new ChampionRepository(
@@ -54,20 +54,20 @@ public class HomeActivityModule {
     }
 
     @Provides
-    @HomeActivityScopeInterface
+    @ChampionsFragmentScopeInterface
     @Named("championMockRepository")
     ChampionRepositoryInterface provideChampionMockRepositoryInterface(ChampionDBRepository championDBRepository, SharedPreferences sharedPreferences) {
         return new ChampionMockRepository(championDBRepository, sharedPreferences, this.keySecondsLastRequest);
     }
 
     @Provides
-    @HomeActivityScopeInterface
+    @ChampionsFragmentScopeInterface
     ChampionDBRepository provideChampionDBRepository(Realm realm) {
         return new ChampionDBRepository(realm);
     }
 
     @Provides
-    @HomeActivityScopeInterface
+    @ChampionsFragmentScopeInterface
     ChampionClientServiceInterface provideChampionClientInterface(@Named("clientRito") Retrofit retrofit) {
         return retrofit.create(ChampionClientServiceInterface.class);
     }

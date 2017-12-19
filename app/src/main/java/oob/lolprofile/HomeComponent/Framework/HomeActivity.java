@@ -1,5 +1,8 @@
 package oob.lolprofile.HomeComponent.Framework;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,52 +12,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Locale;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import oob.lolprofile.ApplicationComponent.BaseApplication;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
-import oob.lolprofile.HomeComponent.Domain.GetAllChampionsUseCase;
-import oob.lolprofile.HomeComponent.Domain.ViewInterface;
-import oob.lolprofile.HomeComponent.Framework.Adapter.ChampionAdapter;
-import oob.lolprofile.HomeComponent.Framework.DependencyInjection.DaggerHomeActivityComponentInterface;
-import oob.lolprofile.HomeComponent.Framework.DependencyInjection.HomeActivityComponentInterface;
-import oob.lolprofile.HomeComponent.Framework.DependencyInjection.HomeActivityModule;
+import oob.lolprofile.HomeComponent.Framework.Fragment.ChampionsFragment;
 import oob.lolprofile.R;
 
-public class HomeActivity extends AppCompatActivity implements ViewInterface, SearchView.OnQueryTextListener {
-
-    HomeActivityComponentInterface component;
+public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.gridViewChampions)
-    GridView gridView;
-
-    @BindView(R.id.progressBarChampionsResume)
-    ProgressBar progressBar;
-
-    @BindView(R.id.imageViewSadFace)
-    ImageView imageViewSadFace;
-
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
 
-    @Inject
-    GetAllChampionsUseCase getAllChampionsUseCase;
+    @BindView(R.id.navigationView)
+    NavigationView navigationView;
 
-    ChampionAdapter championAdapter;
+    private ChampionsFragment championsFragment = new ChampionsFragment();
+    private MenuItem menuItemSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,23 +39,15 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface, Se
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        this.toolbar.setTitle(getString(R.string.activity_home_title));
         this.setSupportActionBar(this.toolbar);
         this.setHomeButton();
+        this.setEventListeners();
 
-        this.component = DaggerHomeActivityComponentInterface.builder()
-                .baseApplicationComponentInterface(((BaseApplication) this.getApplication()).getComponent())
-                .homeActivityModule(
-                        new HomeActivityModule(
-                                this,
-                                Locale.getDefault().toString(),
-                                getString(R.string.api_key_rito),
-                                getString(R.string.key_seconds_last_request)
-                        ))
-                .build();
-        this.component.inject(this);
+        this.setDefaultFragment();
+    }
 
-        this.getAllChampionsUseCase.getAll();
+    private void setEventListeners() {
+        this.navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void setHomeButton() {
@@ -91,8 +60,8 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface, Se
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        MenuItem menuItem = menu.findItem(R.id.search);
-        SearchView viewSearch = (SearchView) menuItem.getActionView();
+        this.menuItemSearch = menu.findItem(R.id.search);
+        SearchView viewSearch = (SearchView) this.menuItemSearch.getActionView();
         viewSearch.setOnQueryTextListener(this);
 
         return true;
@@ -108,20 +77,17 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface, Se
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void showChampions(ArrayList<Champion> champions) {
-        this.championAdapter = new ChampionAdapter(this, champions, R.layout.grid_champion_item);
-        this.gridView.setAdapter(this.championAdapter);
-        this.progressBar.setVisibility(View.GONE);
-        this.imageViewSadFace.setVisibility(View.GONE);
-        this.gridView.setVisibility(View.VISIBLE);
+    private void updateFragmentView(MenuItem item, Fragment fragment) {
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayoutMainContent, fragment).commit();
+        ActionBar actionBar = this.getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle(item.getTitle());
+        item.setChecked(true);
+        this.drawerLayout.closeDrawers();
     }
 
-    @Override
-    public void showError(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-        this.progressBar.setVisibility(View.GONE);
-        this.imageViewSadFace.setVisibility(View.VISIBLE);
+    private void setDefaultFragment() {
+        this.updateFragmentView(this.navigationView.getMenu().getItem(0), this.championsFragment);
     }
 
     @Override
@@ -131,7 +97,30 @@ public class HomeActivity extends AppCompatActivity implements ViewInterface, Se
 
     @Override
     public boolean onQueryTextChange(String champName) {
-        this.championAdapter.filterByName(champName);
+        this.championsFragment.filterChampsByName(champName);
         return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = this.getFragment(item.getItemId());
+
+        if (fragment == null) {
+            return false;
+        }
+        updateFragmentView(item, fragment);
+        return true;
+    }
+
+    private Fragment getFragment(int itemId) {
+        switch (itemId) {
+            case R.id.menu_champions:
+                return this.championsFragment;
+            case R.id.menu_summoner:
+            case R.id.menu_options:
+            default:
+                Toast.makeText(this, "I don't know man", Toast.LENGTH_SHORT).show();
+                return null;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Adapter;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
