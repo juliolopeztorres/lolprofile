@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.DependencyInjection;
+package oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.CLASS)
-@interface HomeActivityScopeInterface {
+@interface ChampionsFragmentScopeInterface {
 }

@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Adapter;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Adapter;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 
