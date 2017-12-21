@@ -117,9 +117,9 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                 return this.championsFragment;
             case R.id.menu_summoner:
             case R.id.menu_options:
+                this.drawerLayout.closeDrawers();
                 Intent it = new Intent(this, DetailsActivity.class);
                 startActivity(it);
-                this.drawerLayout.closeDrawers();
                 return null;
             default:
                 return null;
