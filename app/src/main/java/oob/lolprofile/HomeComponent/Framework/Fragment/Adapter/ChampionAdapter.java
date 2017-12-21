@@ -20,12 +20,14 @@ public class ChampionAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Champion> champions, championsFiltered;
     private int layout;
+    private OnChampionEvents eventsManagement;
 
-    public ChampionAdapter(Context context, final ArrayList<Champion> champions, int layout) {
+    public ChampionAdapter(Context context, final ArrayList<Champion> champions, int layout, OnChampionEvents eventsManagement) {
         this.context = context;
         this.champions = champions;
         this.championsFiltered = new ArrayList<Champion>() {{ addAll(champions); }};
         this.layout = layout;
+        this.eventsManagement = eventsManagement;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class ChampionAdapter extends BaseAdapter {
 
         ChampionViewHolder championViewHolder = (ChampionViewHolder) view.getTag();
 
-        Champion champion = this.championsFiltered.get(i);
+        final Champion champion = this.championsFiltered.get(i);
 
         Picasso.with(this.context)
                 .load(String.format(this.context.getString(R.string.base_url_champion_image), champion.getImage()))
@@ -57,6 +59,13 @@ public class ChampionAdapter extends BaseAdapter {
                 .centerCrop()
                 .fit()
                 .into(championViewHolder.getChampionAvatar());
+
+        championViewHolder.getChampionAvatar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventsManagement.onClick(champions, champion);
+            }
+        });
 
         championViewHolder.getTextViewChampionName().setText(champion.getName());
 
@@ -93,5 +102,9 @@ public class ChampionAdapter extends BaseAdapter {
         }
 
         this.notifyDataSetChanged();
+    }
+
+    public interface OnChampionEvents {
+        void onClick(ArrayList<Champion> champions, Champion championClicked);
     }
 }

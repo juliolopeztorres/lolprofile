@@ -47,4 +47,15 @@ public class Counter implements Comparable {
 
         return counters;
     }
+
+    public static ArrayList<Counter> getCountersFilteredById(ArrayList<Counter> counters, int champId) {
+        ArrayList<Counter> countersFiltered = new ArrayList<>();
+        for (Counter counter: counters) {
+            if (counter.getId() != champId) {
+                countersFiltered.add(counter);
+            }
+        }
+
+        return countersFiltered;
+    }
 }

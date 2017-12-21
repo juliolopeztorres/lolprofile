@@ -4,7 +4,7 @@
     <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
     <string name="base_url_rito">https://euw1.api.riotgames.com/lol/static-data/v3/</string>
-    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.2.1/img/champion/%s</string>
+    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/%s</string>
     <string name="base_url_champion_splash">http://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
 
     <!-- TOOLBAR -->
@@ -33,14 +33,14 @@
     <string name="tab_item_adc_label">ADC</string>
     <string name="tab_item_sup_label">SUP</string>
     <string name="champion_games">%s games</string>
-    <string name="champion_win_rate">%s%%</string>
+    <string name="champion_win_rate">%s%% WR</string>
     <string name="champion_kda">%s/%s/%s</string>
     <string name="counter_champion_rate_wins">%s%% - %s wins</string>
     <string name="elo_key_bronze">BRONZE</string>
     <string name="elo_key_silver">SILVER</string>
     <string name="elo_key_gold">GOLD</string>
     <string name="elo_key_platinum">PLATINUM</string>
-    <string name="elo_key_high_elo">PLATINUM,DIAMOND,MASTER,CHALLENGER</string>
+    <string name="elo_key_high_elo"></string>
     <string name="no_counters_found">There is no counters info for ELO selected :(</string>
     <string name="elo_default_key">SILVER</string>
 </resources>

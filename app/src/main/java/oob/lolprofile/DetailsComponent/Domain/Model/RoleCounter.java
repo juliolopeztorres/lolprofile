@@ -23,4 +23,14 @@ public class RoleCounter {
         this.counters = counters;
         return this;
     }
+
+    public static ArrayList<Counter> getCountersBySameRole(ArrayList<RoleCounter> roleCounters, String role, int champId) {
+        for (RoleCounter roleCounter: roleCounters) {
+            if (roleCounter.getRole().equals(role)) {
+                return Counter.getCountersFilteredById(roleCounter.getCounters(), champId);
+            }
+        }
+
+        return null;
+    }
 }

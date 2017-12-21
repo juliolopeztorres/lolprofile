@@ -10,11 +10,11 @@ import java.util.Collections;
 import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
 
 class CounterCollectionMapper {
-    static ArrayList<Counter> parseCounters(JsonArray matchUp) {
+    static ArrayList<Counter> parseCounters(JsonArray matchUp, int currentChampId) {
         ArrayList<Counter> counters = new ArrayList<>();
 
         for(JsonElement jsonElement: matchUp) {
-            counters.add(CounterMapper.parseCounters((JsonObject) jsonElement));
+            counters.add(CounterMapper.parseCounters((JsonObject) jsonElement, currentChampId));
         }
 
         Collections.sort(counters);

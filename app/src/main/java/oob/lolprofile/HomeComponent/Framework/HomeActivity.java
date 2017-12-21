@@ -13,13 +13,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import oob.lolprofile.DetailsComponent.Framework.DetailsActivity;
+import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Adapter.ChampionAdapter;
 import oob.lolprofile.HomeComponent.Framework.Fragment.ChampionsFragment;
 import oob.lolprofile.R;
 
-public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener, ChampionAdapter.OnChampionEvents {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -118,11 +123,20 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             case R.id.menu_summoner:
             case R.id.menu_options:
                 this.drawerLayout.closeDrawers();
-                Intent it = new Intent(this, DetailsActivity.class);
-                startActivity(it);
                 return null;
             default:
                 return null;
         }
+    }
+
+    @Override
+    public void onClick(ArrayList<Champion> champions, Champion championClicked) {
+        this.championsFragment.showLoading();
+        Intent it = new Intent(this, DetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DetailsActivity.KEY_CHAMPIONS, champions);
+        bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
+        it.putExtras(bundle);
+        startActivity(it);
     }
 }

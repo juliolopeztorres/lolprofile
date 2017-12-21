@@ -1,8 +1,9 @@
 package oob.lolprofile.HomeComponent.Domain.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Champion {
+public class Champion implements Serializable {
     private int id;
     private String name;
     private String title;

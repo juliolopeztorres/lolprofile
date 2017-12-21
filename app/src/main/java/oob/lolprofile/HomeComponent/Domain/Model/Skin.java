@@ -1,6 +1,8 @@
 package oob.lolprofile.HomeComponent.Domain.Model;
 
-public class Skin {
+import java.io.Serializable;
+
+public class Skin implements Serializable {
     private int id;
     private String name;
     private int num;

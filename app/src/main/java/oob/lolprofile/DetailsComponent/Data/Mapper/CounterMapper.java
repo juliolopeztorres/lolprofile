@@ -5,13 +5,20 @@ import com.google.gson.JsonObject;
 import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
 
 class CounterMapper {
-    static Counter parseCounters(JsonObject matchUp) {
+    static Counter parseCounters(JsonObject matchUp, int currentChampId) {
         Counter counter = new Counter();
+        String keyCounterChampId = "champ2_id";
+        String keyCounterChamp = "champ2";
 
-        JsonObject counterChampInfo = matchUp.get("champ2").getAsJsonObject();
+        if (matchUp.get(keyCounterChampId).getAsInt() == currentChampId) {
+            keyCounterChampId = "champ1_id";
+            keyCounterChamp = "champ1";
+        }
+
+        JsonObject counterChampInfo = matchUp.get(keyCounterChamp).getAsJsonObject();
 
         counter
-                .setId(matchUp.get("champ2_id").getAsInt())
+                .setId(matchUp.get(keyCounterChampId).getAsInt())
                 .setWinRate(counterChampInfo.get("winrate").getAsDouble())
                 .setWins(counterChampInfo.get("wins").getAsInt())
         ;

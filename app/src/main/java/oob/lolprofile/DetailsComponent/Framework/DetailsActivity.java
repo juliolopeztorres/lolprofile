@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -36,8 +37,12 @@ import oob.lolprofile.R;
 import oob.lolprofile.Util.DoubleOperation;
 import oob.lolprofile.Util.ExpandableHeightGridView;
 import oob.lolprofile.Util.RoleNamesParser;
+import timber.log.Timber;
 
-public class DetailsActivity extends AppCompatActivity implements ChampionRepositoryInterface.ChampionCallback, ViewInterface, TabLayout.OnTabSelectedListener {
+public class DetailsActivity extends AppCompatActivity implements ViewInterface, TabLayout.OnTabSelectedListener {
+
+    public static final String KEY_CHAMPIONS = "champions";
+    public static final String KEY_CHAMPION_CLICKED = "championClicked";
 
     DetailsActivityComponentInterface component;
 
@@ -63,14 +68,12 @@ public class DetailsActivity extends AppCompatActivity implements ChampionReposi
     TextView textViewChampionWinGames;
 
     @Inject
-    ChampionRepositoryInterface championRepository;
-    @Inject
     GetCounterChampionsByChampionIdUseCase getCounterChampionsByChampionIdUseCase;
 
     private int rowCounters;
     private ArrayList<ChampionRoleCounter> championRoleCounters;
     private ArrayList<Champion> champions;
-    private int championId = 1; // Annie
+    private Champion championClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +87,33 @@ public class DetailsActivity extends AppCompatActivity implements ChampionReposi
                 .build();
         this.component.inject(this);
 
+        if (!this.recoverParamsFromBundle()) {
+            this.showError("No data found in bundle! :S");
+            return;
+        }
+
         this.rowCounters = getResources().getInteger(R.integer.grid_view_rows_counters) * getResources().getInteger(R.integer.grid_view_columns_counters);
-        toolbar.setTitle("Annie");
         this.tabLayout.addOnTabSelectedListener(this);
         this.setSupportActionBar(this.toolbar);
         this.setBackButton();
+    }
 
-        this.championRepository.getAll(this);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.setChampionInfo();
+        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championClicked.getId(), getString(R.string.elo_default_key));
+    }
+
+    private boolean recoverParamsFromBundle() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return false;
+        }
+        this.champions = (ArrayList<Champion>) bundle.getSerializable(KEY_CHAMPIONS);
+        this.championClicked = ((Champion) bundle.getSerializable(KEY_CHAMPION_CLICKED));
+
+        return true;
     }
 
     @Override
@@ -123,64 +146,51 @@ public class DetailsActivity extends AppCompatActivity implements ChampionReposi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        String eloKey;
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
             case R.id.menu_details_bronze:
-                this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championId, getString(R.string.elo_key_bronze));
+                eloKey = getString(R.string.elo_key_bronze);
                 break;
             case R.id.menu_details_silver:
-                this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championId, getString(R.string.elo_key_silver));
+                eloKey = getString(R.string.elo_key_silver);
                 break;
             case R.id.menu_details_gold:
-                this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championId, getString(R.string.elo_key_gold));
+                eloKey = getString(R.string.elo_key_gold);
                 break;
             case R.id.menu_details_platinum:
-                this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championId, getString(R.string.elo_key_platinum));
+                eloKey = getString(R.string.elo_key_platinum);
                 break;
             case R.id.menu_details_high_elo:
-                this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championId, getString(R.string.elo_key_high_elo));
+                eloKey = getString(R.string.elo_key_high_elo);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championClicked.getId(), eloKey);
         item.setChecked(true);
         return true;
     }
 
-    @Override
-    public void onSuccess(ArrayList<Champion> champions) {
-        this.champions = champions;
-        Champion annie = Champion.findById(this.champions, this.championId);
-        assert annie != null;
-        this.setChampionInfo(annie);
+    private void setChampionInfo() {
+        toolbar.setTitle(this.championClicked.getName());
+        this.setChampionSplash();
 
-        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(annie.getId(), getString(R.string.elo_default_key));
+        this.textViewChampionDescription.setText(this.championClicked.getTitle());
+        this.textViewLore.setText(this.championClicked.getLore());
     }
 
-    @Override
-    public void onError(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-    }
-
-    private void setChampionInfo(Champion championInfo) {
-        toolbar.setTitle(championInfo.getName());
-        this.setChampionSplash(championInfo);
-
-        this.textViewChampionDescription.setText(championInfo.getTitle());
-        this.textViewLore.setText(championInfo.getLore());
-    }
-
-    private void setChampionSplash(Champion championInfo) {
-        int randomSkinNumber = (new Random()).nextInt(championInfo.getSkins().size());
+    private void setChampionSplash() {
+        int randomSkinNumber = (new Random()).nextInt(this.championClicked.getSkins().size());
         Picasso.with(this)
                 .load(
                         String.format(
                                 getString(R.string.base_url_champion_splash),
-                                championInfo.getName(),
-                                String.valueOf(championInfo.getSkins().get(randomSkinNumber).getNum()))
+                                this.championClicked.getName(),
+                                String.valueOf(this.championClicked.getSkins().get(randomSkinNumber).getNum()))
                 )
                 .centerCrop()
                 .fit()
@@ -243,7 +253,7 @@ public class DetailsActivity extends AppCompatActivity implements ChampionReposi
     }
 
     public void showCounters(String role) {
-        ArrayList<Counter> championCounters = ChampionRoleCounter.getCountersByRole(this.championRoleCounters, role);
+        ArrayList<Counter> championCounters = ChampionRoleCounter.getCountersByRole(this.championRoleCounters, role, this.championClicked.getId());
         assert championCounters != null;
         this.showChampionsInGrid(Counter.filter(championCounters, 0, rowCounters), this.gridViewCounterChampions);
 

@@ -34,6 +34,7 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
     ChampionsFragmentComponentInterface component;
 
     private Context context;
+    private ChampionAdapter.OnChampionEvents eventsManagement;
 
     @BindView(R.id.gridViewChampions)
     GridView gridView;
@@ -50,6 +51,12 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
     private ChampionAdapter championAdapter;
 
     public ChampionsFragment() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        this.eventsManagement = (ChampionAdapter.OnChampionEvents) context;
+        super.onAttach(context);
     }
 
     @Override
@@ -76,12 +83,16 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        this.hideLoading();
+    }
+
+    @Override
     public void showChampions(ArrayList<Champion> champions) {
-        this.championAdapter = new ChampionAdapter(this.context, champions, R.layout.grid_champion_item);
+        this.championAdapter = new ChampionAdapter(this.context, champions, R.layout.grid_champion_item, this.eventsManagement);
         this.gridView.setAdapter(this.championAdapter);
-        this.progressBar.setVisibility(View.GONE);
-        this.imageViewSadFace.setVisibility(View.GONE);
-        this.gridView.setVisibility(View.VISIBLE);
+        this.hideLoading();
     }
 
     @Override
@@ -93,5 +104,17 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
 
     public void filterChampsByName(String champName) {
         this.championAdapter.filterByName(champName);
+    }
+
+    public void showLoading() {
+        this.progressBar.setVisibility(View.VISIBLE);
+        this.imageViewSadFace.setVisibility(View.GONE);
+        this.gridView.setVisibility(View.GONE);
+    }
+
+    private void hideLoading() {
+        this.progressBar.setVisibility(View.GONE);
+        this.imageViewSadFace.setVisibility(View.GONE);
+        this.gridView.setVisibility(View.VISIBLE);
     }
 }

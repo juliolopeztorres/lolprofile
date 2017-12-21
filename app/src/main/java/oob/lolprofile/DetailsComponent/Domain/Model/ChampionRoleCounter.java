@@ -134,20 +134,10 @@ public class ChampionRoleCounter {
         return roles;
     }
 
-    public static ArrayList<Counter> getCountersByRole(ArrayList<ChampionRoleCounter> championRoleCounters, String role) {
+    public static ArrayList<Counter> getCountersByRole(ArrayList<ChampionRoleCounter> championRoleCounters, String role, int championId) {
         for(ChampionRoleCounter championRoleCounter: championRoleCounters) {
             if (championRoleCounter.getRole().equals(role)) {
-                return getCountersBySameRole(championRoleCounter.getRoleCounters(), role);
-            }
-        }
-
-        return null;
-    }
-
-    private static ArrayList<Counter> getCountersBySameRole(ArrayList<RoleCounter> roleCounters, String role) {
-        for (RoleCounter roleCounter: roleCounters) {
-            if (roleCounter.getRole().equals(role)) {
-                return roleCounter.getCounters();
+                return RoleCounter.getCountersBySameRole(championRoleCounter.getRoleCounters(), role, championId);
             }
         }
 

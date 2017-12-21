@@ -7,12 +7,12 @@ import java.util.Map;
 import oob.lolprofile.DetailsComponent.Domain.Model.RoleCounter;
 
 class RoleCounterMapper {
-    static RoleCounter parseRoleCounter(Map.Entry<String, JsonElement> matchUp) {
+    static RoleCounter parseRoleCounter(Map.Entry<String, JsonElement> matchUp, int currentChampId) {
         RoleCounter roleCounter = new RoleCounter();
 
         roleCounter
                 .setRole(matchUp.getKey())
-                .setCounters(CounterCollectionMapper.parseCounters((matchUp.getValue().getAsJsonArray())))
+                .setCounters(CounterCollectionMapper.parseCounters(matchUp.getValue().getAsJsonArray(), currentChampId))
         ;
 
         return roleCounter;
