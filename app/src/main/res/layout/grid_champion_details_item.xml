@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/roundImageViewChampionAvatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="3dp"
+        android:contentDescription="@string/content_description_champion_image_placeholder"
+        app:riv_corner_radius="10dp" />
+
+    <TextView
+        android:id="@+id/textViewChampionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewChampionWinRateWins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/counter_champion_rate_wins"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+</LinearLayout>
