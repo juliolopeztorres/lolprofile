@@ -27,11 +27,6 @@
     <string name="menu_details_gold_label">GOLD</string>
     <string name="menu_details_platinum_label">PLATINUM</string>
     <string name="menu_details_high_elo_label">HIGH ELO</string>
-    <string name="tab_item_top_label">TOP</string>
-    <string name="tab_item_jungle_label">JUNGLE</string>
-    <string name="tab_item_mid_label">MID</string>
-    <string name="tab_item_adc_label">ADC</string>
-    <string name="tab_item_sup_label">SUP</string>
     <string name="champion_games">%s games</string>
     <string name="champion_win_rate">%s%% WR</string>
     <string name="champion_kda">%s/%s/%s</string>
