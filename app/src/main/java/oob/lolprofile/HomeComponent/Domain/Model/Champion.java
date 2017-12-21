@@ -63,4 +63,14 @@ public class Champion {
         this.skins = skins;
         return this;
     }
+
+    public static Champion findById(ArrayList<Champion> champions, int id) {
+        for(Champion champion: champions) {
+            if (id == champion.getId()) {
+                return champion;
+            }
+        }
+
+        return null;
+    }
 }
