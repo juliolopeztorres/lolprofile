@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -191,7 +192,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
                 .load(
                         String.format(
                                 getString(R.string.base_url_champion_splash),
-                                this.championClicked.getName(),
+                                this.championClicked.getKey(),
                                 String.valueOf(this.championClicked.getSkins().get(randomSkinNumber).getNum()))
                 )
                 .centerCrop()
@@ -244,14 +245,17 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
                         DoubleOperation.roundDoubleToString(championRoleCounter.getAssists(), 2)
                 )
         );
+        this.textViewChampionKDA.setVisibility(View.VISIBLE);
 
         this.textViewChampionWinRate.setText(
                 String.format(getString(R.string.champion_win_rate), DoubleOperation.roundDoubleToString(championRoleCounter.getWinRate(), 2))
         );
+        this.textViewChampionWinRate.setVisibility(View.VISIBLE);
 
         this.textViewChampionWinGames.setText(
                 String.format(getString(R.string.champion_games), String.valueOf(championRoleCounter.getGamesPlayed()))
         );
+        this.textViewChampionWinGames.setVisibility(View.VISIBLE);
     }
 
     public void showCounters(String role) {
