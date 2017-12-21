@@ -1,0 +1,25 @@
+<resources>
+    <string name="content_description_champion_image_placeholder">Imagen de fondo del campeón</string>
+    <string name="content_description_sad_face">Ha ocurrido un error :(</string>
+    <string name="activity_home_title">Campeones</string>
+    <string name="content_description_background">Imagen de fondo del campeón</string>
+    <string name="menu_champions_label">Campeones</string>
+    <string name="menu_summoner_label">Invocador</string>
+    <string name="menu_option_label">Opciones</string>
+    <string name="menu_search_label">Buscar</string>
+    <string name="transition_champion_details">Transición del campeón</string>
+    <string name="textView_counter_label">Débil contra</string>
+    <string name="textView_goodAgainst_label">Fuerte contra</string>
+    <string name="textView_lore_label">Historia</string>
+    <string name="menu_details_bronze_label">BRONCE</string>
+    <string name="menu_details_silver_label">PLATA</string>
+    <string name="menu_details_gold_label">ORO</string>
+    <string name="menu_details_platinum_label">PLATINO</string>
+    <string name="menu_details_high_elo_label">LIGAS SUPERIORES</string>
+    <string name="champion_games">%s partidas</string>
+    <string name="champion_win_rate">%s%% victorias</string>
+    <string name="champion_kda">%s/%s/%s</string>
+    <string name="counter_champion_rate_wins">%s%% - %s victorias</string>
+    <string name="no_counters_found">No hay información para el nivel seleccionado :(</string>
+    <string name="message_data_not_found">No hay datos almacenados :S</string>
+</resources>
