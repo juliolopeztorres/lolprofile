@@ -54,6 +54,7 @@ public class ChampionCounterAdapter extends BaseAdapter {
         Counter counter = this.counters.get(i);
         Champion champion = Champion.findById(this.champions, counter.getId());
 
+        assert champion != null;
         Picasso.with(this.context)
                 .load(String.format(this.context.getString(R.string.base_url_champion_image), champion.getImage()))
                 .placeholder(R.drawable.champion_placeholder)
@@ -65,7 +66,7 @@ public class ChampionCounterAdapter extends BaseAdapter {
         championViewHolder.getTextViewChampionWinRateWins().setText(
                 String.format(
                         this.context.getResources().getString(R.string.counter_champion_rate_wins),
-                        String.valueOf(DoubleOperation.round(counter.getWinRate(), 1)),
+                        DoubleOperation.roundDoubleToString(counter.getWinRate(), 1),
                         String.valueOf(counter.getWins())
                 )
         );

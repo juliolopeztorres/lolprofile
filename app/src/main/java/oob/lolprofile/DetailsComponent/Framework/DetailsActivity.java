@@ -227,23 +227,18 @@ public class DetailsActivity extends AppCompatActivity implements ChampionReposi
         this.textViewChampionKDA.setText(
                 String.format(
                         getString(R.string.champion_kda),
-                        DoubleOperation.roundDoubleToString(DoubleOperation.round(championRoleCounter.getKills(), 2)),
-                        DoubleOperation.roundDoubleToString(DoubleOperation.round(championRoleCounter.getDeaths(), 2)),
-                        DoubleOperation.roundDoubleToString(DoubleOperation.round(championRoleCounter.getAssists(), 2))
+                        DoubleOperation.roundDoubleToString(championRoleCounter.getKills(), 2),
+                        DoubleOperation.roundDoubleToString(championRoleCounter.getDeaths(), 2),
+                        DoubleOperation.roundDoubleToString(championRoleCounter.getAssists(), 2)
                 )
         );
 
         this.textViewChampionWinRate.setText(
-                String.format(
-                        getString(R.string.champion_win_rate),
-                        DoubleOperation.roundDoubleToString(DoubleOperation.round(championRoleCounter.getWinRate(), 2))
-                )
+                String.format(getString(R.string.champion_win_rate), DoubleOperation.roundDoubleToString(championRoleCounter.getWinRate(), 2))
         );
+
         this.textViewChampionWinGames.setText(
-                String.format(
-                        getString(R.string.champion_games),
-                        String.valueOf(championRoleCounter.getGamesPlayed())
-                )
+                String.format(getString(R.string.champion_games), String.valueOf(championRoleCounter.getGamesPlayed()))
         );
     }
 

@@ -13,7 +13,9 @@ public class DoubleOperation {
         return bd.doubleValue();
     }
 
-    public static String roundDoubleToString(double value) {
-        return String.valueOf(DoubleOperation.round(value, 2));
+    public static String roundDoubleToString(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        return String.valueOf(DoubleOperation.round(value, places));
     }
 }
