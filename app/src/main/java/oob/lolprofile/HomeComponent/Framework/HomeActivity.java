@@ -1,5 +1,6 @@
 package oob.lolprofile.HomeComponent.Framework;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,10 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import oob.lolprofile.DetailsComponent.Framework.DetailsActivity;
 import oob.lolprofile.HomeComponent.Framework.Fragment.ChampionsFragment;
 import oob.lolprofile.R;
 
@@ -31,7 +31,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     NavigationView navigationView;
 
     private ChampionsFragment championsFragment = new ChampionsFragment();
-    private MenuItem menuItemSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +59,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        this.menuItemSearch = menu.findItem(R.id.search);
-        SearchView viewSearch = (SearchView) this.menuItemSearch.getActionView();
+        MenuItem menuItemSearch = menu.findItem(R.id.search);
+        SearchView viewSearch = (SearchView) menuItemSearch.getActionView();
         viewSearch.setOnQueryTextListener(this);
 
         return true;
@@ -118,8 +117,11 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                 return this.championsFragment;
             case R.id.menu_summoner:
             case R.id.menu_options:
+                Intent it = new Intent(this, DetailsActivity.class);
+                startActivity(it);
+                this.drawerLayout.closeDrawers();
+                return null;
             default:
-                Toast.makeText(this, "I don't know man", Toast.LENGTH_SHORT).show();
                 return null;
         }
     }
