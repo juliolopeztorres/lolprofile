@@ -10,6 +10,8 @@ public class ChampionRow extends RealmObject {
     @Required
     private String name;
     @Required
+    private String key;
+    @Required
     private String title;
     @Required
     private String lore;
@@ -33,6 +35,15 @@ public class ChampionRow extends RealmObject {
 
     public ChampionRow setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public ChampionRow setKey(String key) {
+        this.key = key;
         return this;
     }
 

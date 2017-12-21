@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Champion implements Serializable {
     private int id;
+    private String key;
     private String name;
     private String title;
     private String lore;
@@ -17,6 +18,15 @@ public class Champion implements Serializable {
 
     public Champion setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Champion setKey(String key) {
+        this.key = key;
         return this;
     }
 

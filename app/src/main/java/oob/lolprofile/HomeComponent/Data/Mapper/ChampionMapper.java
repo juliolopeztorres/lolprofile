@@ -11,6 +11,7 @@ class ChampionMapper {
 
         champion
                 .setId(championResponse.get("id").getAsInt())
+                .setKey(championResponse.get("key").getAsString())
                 .setImage(championResponse.getAsJsonObject("image").get("full").getAsString())
                 .setLore(championResponse.get("lore").getAsString())
                 .setName(championResponse.get("name").getAsString())
@@ -26,6 +27,7 @@ class ChampionMapper {
 
         champion
                 .setId(championRow.getId())
+                .setKey(championRow.getKey())
                 .setImage(championRow.getImage())
                 .setLore(championRow.getLore())
                 .setName(championRow.getName())
@@ -41,6 +43,7 @@ class ChampionMapper {
 
         championRow
                 .setId(champion.getId())
+                .setKey(champion.getKey())
                 .setImage(champion.getImage())
                 .setLore(champion.getLore())
                 .setName(champion.getName())
