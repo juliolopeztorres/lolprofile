@@ -22,12 +22,14 @@ public class ChampionCounterAdapter extends BaseAdapter {
     private ArrayList<Champion> champions;
     private ArrayList<Counter> counters;
     private int layout;
+    private OnChampionEvents eventsManagement;
 
-    public ChampionCounterAdapter(Context context, ArrayList<Champion> champions, ArrayList<Counter> counters, int layout) {
+    public ChampionCounterAdapter(Context context, ArrayList<Champion> champions, ArrayList<Counter> counters, int layout, OnChampionEvents eventsManagement) {
         this.context = context;
         this.champions = champions;
         this.counters = counters;
         this.layout = layout;
+        this.eventsManagement = eventsManagement;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class ChampionCounterAdapter extends BaseAdapter {
         ChampionViewHolder championViewHolder = (ChampionViewHolder) view.getTag();
 
         Counter counter = this.counters.get(i);
-        Champion champion = Champion.findById(this.champions, counter.getId());
+        final Champion champion = Champion.findById(this.champions, counter.getId());
 
         assert champion != null;
         Picasso.with(this.context)
@@ -61,6 +63,13 @@ public class ChampionCounterAdapter extends BaseAdapter {
                 .centerCrop()
                 .fit()
                 .into(championViewHolder.getChampionAvatar());
+
+        championViewHolder.getChampionAvatar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventsManagement.onClick(champions, champion);
+            }
+        });
 
         championViewHolder.getTextViewChampionName().setText(champion.getName());
         championViewHolder.getTextViewChampionWinRateWins().setText(
@@ -89,5 +98,9 @@ public class ChampionCounterAdapter extends BaseAdapter {
                 .setTextViewChampionName((TextView) view.findViewById(R.id.textViewChampionName))
                 .setTextViewChampionWinRateWins((TextView) view.findViewById(R.id.textViewChampionWinRateWins))
                 ;
+    }
+
+    public interface OnChampionEvents {
+        void onClick(ArrayList<Champion> champions, Champion championClicked);
     }
 }

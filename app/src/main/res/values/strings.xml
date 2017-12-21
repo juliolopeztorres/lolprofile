@@ -43,4 +43,5 @@
     <string name="elo_key_high_elo"></string>
     <string name="no_counters_found">There is no counters info for ELO selected :(</string>
     <string name="elo_default_key">SILVER</string>
+    <string name="message_data_not_found">No data found in bundle! :S</string>
 </resources>

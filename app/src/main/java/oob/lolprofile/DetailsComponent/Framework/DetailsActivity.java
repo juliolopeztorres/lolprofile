@@ -1,11 +1,11 @@
 package oob.lolprofile.DetailsComponent.Framework;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -31,15 +31,13 @@ import oob.lolprofile.DetailsComponent.Framework.Adapter.ChampionCounterAdapter;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DaggerDetailsActivityComponentInterface;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityComponentInterface;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityModule;
-import oob.lolprofile.HomeComponent.Domain.ChampionRepositoryInterface;
 import oob.lolprofile.HomeComponent.Domain.Model.Champion;
 import oob.lolprofile.R;
 import oob.lolprofile.Util.DoubleOperation;
 import oob.lolprofile.Util.ExpandableHeightGridView;
 import oob.lolprofile.Util.RoleNamesParser;
-import timber.log.Timber;
 
-public class DetailsActivity extends AppCompatActivity implements ViewInterface, TabLayout.OnTabSelectedListener {
+public class DetailsActivity extends AppCompatActivity implements ViewInterface, TabLayout.OnTabSelectedListener, ChampionCounterAdapter.OnChampionEvents {
 
     public static final String KEY_CHAMPIONS = "champions";
     public static final String KEY_CHAMPION_CLICKED = "championClicked";
@@ -88,7 +86,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
         this.component.inject(this);
 
         if (!this.recoverParamsFromBundle()) {
-            this.showError("No data found in bundle! :S");
+            this.showError(getString(R.string.message_data_not_found));
             return;
         }
 
@@ -179,8 +177,12 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
         toolbar.setTitle(this.championClicked.getName());
         this.setChampionSplash();
 
-        this.textViewChampionDescription.setText(this.championClicked.getTitle());
+        this.textViewChampionDescription.setText(this.ucword(this.championClicked.getTitle()));
         this.textViewLore.setText(this.championClicked.getLore());
+    }
+
+    private String ucword(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
     }
 
     private void setChampionSplash() {
@@ -267,9 +269,20 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
                 this,
                 this.champions,
                 championsToShow,
-                R.layout.grid_champion_details_item
+                R.layout.grid_champion_details_item,
+                this
         );
         gridView.setAdapter(championCounterAdapter);
         gridView.setExpanded(true);
+    }
+
+    @Override
+    public void onClick(ArrayList<Champion> champions, Champion championClicked) {
+        Intent it = new Intent(this, DetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DetailsActivity.KEY_CHAMPIONS, champions);
+        bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
+        it.putExtras(bundle);
+        startActivity(it);
     }
 }
