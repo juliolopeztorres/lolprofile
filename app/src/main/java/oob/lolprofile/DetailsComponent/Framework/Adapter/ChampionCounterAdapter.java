@@ -1,7 +1,6 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment.Adapter;
+package oob.lolprofile.DetailsComponent.Framework.Adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,29 +12,32 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
 import oob.lolprofile.HomeComponent.Domain.Model.Champion;
 import oob.lolprofile.R;
+import oob.lolprofile.Util.DoubleOperation;
 
-public class ChampionAdapter extends BaseAdapter {
+public class ChampionCounterAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Champion> champions, championsFiltered;
+    private ArrayList<Champion> champions;
+    private ArrayList<Counter> counters;
     private int layout;
 
-    public ChampionAdapter(Context context, final ArrayList<Champion> champions, int layout) {
+    public ChampionCounterAdapter(Context context, ArrayList<Champion> champions, ArrayList<Counter> counters, int layout) {
         this.context = context;
         this.champions = champions;
-        this.championsFiltered = new ArrayList<Champion>() {{ addAll(champions); }};
+        this.counters = counters;
         this.layout = layout;
     }
 
     @Override
     public int getCount() {
-        return this.championsFiltered.size();
+        return this.counters.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return this.championsFiltered.get(i);
+        return this.counters.get(i);
     }
 
     @Override
@@ -49,7 +51,8 @@ public class ChampionAdapter extends BaseAdapter {
 
         ChampionViewHolder championViewHolder = (ChampionViewHolder) view.getTag();
 
-        Champion champion = this.championsFiltered.get(i);
+        Counter counter = this.counters.get(i);
+        Champion champion = Champion.findById(this.champions, counter.getId());
 
         Picasso.with(this.context)
                 .load(String.format(this.context.getString(R.string.base_url_champion_image), champion.getImage()))
@@ -59,6 +62,13 @@ public class ChampionAdapter extends BaseAdapter {
                 .into(championViewHolder.getChampionAvatar());
 
         championViewHolder.getTextViewChampionName().setText(champion.getName());
+        championViewHolder.getTextViewChampionWinRateWins().setText(
+                String.format(
+                        this.context.getResources().getString(R.string.counter_champion_rate_wins),
+                        String.valueOf(DoubleOperation.round(counter.getWinRate(), 1)),
+                        String.valueOf(counter.getWins())
+                )
+        );
 
         return view;
     }
@@ -75,23 +85,8 @@ public class ChampionAdapter extends BaseAdapter {
     private ChampionViewHolder createViewHolder(View view) {
         return (new ChampionViewHolder())
                 .setChampionAvatar((RoundedImageView) view.findViewById(R.id.roundImageViewChampionAvatar))
-                .setTextViewChampionName((TextView) view.findViewById(R.id.textViewAllChampionName))
+                .setTextViewChampionName((TextView) view.findViewById(R.id.textViewChampionName))
+                .setTextViewChampionWinRateWins((TextView) view.findViewById(R.id.textViewChampionWinRateWins))
                 ;
-    }
-
-    public void filterByName(String champName) {
-        this.championsFiltered.clear();
-
-        if (TextUtils.isEmpty(champName)) {
-            this.championsFiltered.addAll(this.champions);
-        } else {
-            for(Champion champion: this.champions) {
-                if (champion.getName().toLowerCase().contains(champName.toLowerCase())) {
-                    this.championsFiltered.add(champion);
-                }
-            }
-        }
-
-        this.notifyDataSetChanged();
     }
 }
