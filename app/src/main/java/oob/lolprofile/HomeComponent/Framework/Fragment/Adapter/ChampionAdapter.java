@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -52,10 +53,12 @@ public class ChampionAdapter extends BaseAdapter {
 
         Picasso.with(this.context)
                 .load(String.format(this.context.getString(R.string.base_url_champion_image), champion.getImage()))
-                .placeholder(R.drawable.teemo_goes_high)
+                .placeholder(R.drawable.champion_placeholder)
                 .centerCrop()
                 .fit()
                 .into(championViewHolder.getChampionAvatar());
+
+        championViewHolder.getTextViewChampionName().setText(champion.getName());
 
         return view;
     }
@@ -71,7 +74,9 @@ public class ChampionAdapter extends BaseAdapter {
 
     private ChampionViewHolder createViewHolder(View view) {
         return (new ChampionViewHolder())
-                .setChampionAvatar((RoundedImageView) view.findViewById(R.id.roundImageViewChampionAvatar));
+                .setChampionAvatar((RoundedImageView) view.findViewById(R.id.roundImageViewChampionAvatar))
+                .setTextViewChampionName((TextView) view.findViewById(R.id.textViewAllChampionName))
+                ;
     }
 
     public void filterByName(String champName) {
