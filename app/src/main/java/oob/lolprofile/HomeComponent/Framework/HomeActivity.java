@@ -13,15 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import oob.lolprofile.DetailsComponent.Framework.DetailsActivity;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
-import oob.lolprofile.HomeComponent.Framework.Fragment.Adapter.ChampionAdapter;
-import oob.lolprofile.HomeComponent.Framework.Fragment.ChampionsFragment;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.Adapter.ChampionAdapter;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.ChampionsFragment;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Option.OptionsFragment;
 import oob.lolprofile.R;
 
 public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener, ChampionAdapter.OnChampionEvents {
@@ -35,7 +37,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     @BindView(R.id.navigationView)
     NavigationView navigationView;
 
+    SearchView viewSearch;
+
     private ChampionsFragment championsFragment = new ChampionsFragment();
+    private OptionsFragment optionsFragment = new OptionsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +70,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem menuItemSearch = menu.findItem(R.id.search);
-        SearchView viewSearch = (SearchView) menuItemSearch.getActionView();
-        viewSearch.setOnQueryTextListener(this);
+        this.viewSearch = (SearchView) menuItemSearch.getActionView();
+        this.viewSearch.setOnQueryTextListener(this);
 
         return true;
     }
@@ -117,12 +122,15 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     private Fragment getFragment(int itemId) {
+        this.drawerLayout.closeDrawers();
+        this.viewSearch.setVisibility(View.GONE);
         switch (itemId) {
             case R.id.menu_champions:
+                this.viewSearch.setVisibility(View.VISIBLE);
                 return this.championsFragment;
-            case R.id.menu_summoner:
             case R.id.menu_options:
-                this.drawerLayout.closeDrawers();
+                return this.optionsFragment;
+            case R.id.menu_summoner:
                 return null;
             default:
                 return null;
