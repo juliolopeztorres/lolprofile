@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Champion;
 
 
 import android.content.Context;
@@ -20,13 +20,13 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import oob.lolprofile.ApplicationComponent.BaseApplication;
-import oob.lolprofile.HomeComponent.Domain.GetAllChampionsUseCase;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
-import oob.lolprofile.HomeComponent.Domain.ViewInterface;
-import oob.lolprofile.HomeComponent.Framework.Fragment.Adapter.ChampionAdapter;
-import oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection.ChampionsFragmentComponentInterface;
-import oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection.ChampionsFragmentModule;
-import oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection.DaggerChampionsFragmentComponentInterface;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.GetAllChampionsUseCase;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.ViewInterface;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.Adapter.ChampionAdapter;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.DependencyInjection.ChampionsFragmentComponentInterface;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.DependencyInjection.ChampionsFragmentModule;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.DependencyInjection.DaggerChampionsFragmentComponentInterface;
 import oob.lolprofile.R;
 
 public class ChampionsFragment extends Fragment implements ViewInterface {

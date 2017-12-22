@@ -1,4 +1,4 @@
-package oob.lolprofile.DetailsComponent.Domain.Model;
+package oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model;
 
 import java.util.ArrayList;
 import oob.lolprofile.Util.RoleNamesParser;

@@ -1,9 +1,9 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Champion.DependencyInjection;
 
 
 import dagger.Component;
 import oob.lolprofile.ApplicationComponent.DependencyInjection.BaseApplicationComponentInterface;
-import oob.lolprofile.HomeComponent.Framework.Fragment.ChampionsFragment;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.ChampionsFragment;
 
 @ChampionsFragmentScopeInterface
 @Component(modules = ChampionsFragmentModule.class, dependencies = BaseApplicationComponentInterface.class)

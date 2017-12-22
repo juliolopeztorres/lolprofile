@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Domain.Model;
+package oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model;
 
 import java.io.Serializable;
 

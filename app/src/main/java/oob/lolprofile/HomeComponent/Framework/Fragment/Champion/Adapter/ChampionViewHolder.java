@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment.Adapter;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Champion.Adapter;
 
 import android.widget.TextView;
 

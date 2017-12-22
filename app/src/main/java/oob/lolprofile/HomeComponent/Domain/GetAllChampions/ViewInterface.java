@@ -1,8 +1,8 @@
-package oob.lolprofile.HomeComponent.Domain;
+package oob.lolprofile.HomeComponent.Domain.GetAllChampions;
 
 import java.util.ArrayList;
 
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 
 public interface ViewInterface {
     void showChampions(ArrayList<Champion> champions);

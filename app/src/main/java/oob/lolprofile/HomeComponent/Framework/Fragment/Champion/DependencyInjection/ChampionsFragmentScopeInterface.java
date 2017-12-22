@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Champion.DependencyInjection;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

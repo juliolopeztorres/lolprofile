@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment.DependencyInjection;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Champion.DependencyInjection;
 
 import android.content.SharedPreferences;
 
@@ -11,9 +11,10 @@ import oob.lolprofile.HomeComponent.Data.ChampionClientServiceInterface;
 import oob.lolprofile.HomeComponent.Data.Repository.ChampionDBRepository;
 import oob.lolprofile.HomeComponent.Data.Repository.ChampionMockRepository;
 import oob.lolprofile.HomeComponent.Data.Repository.ChampionRepository;
-import oob.lolprofile.HomeComponent.Domain.ChampionRepositoryInterface;
-import oob.lolprofile.HomeComponent.Domain.GetAllChampionsUseCase;
-import oob.lolprofile.HomeComponent.Domain.ViewInterface;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.ChampionRepositoryInterface;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.GetAllChampionsUseCase;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.ViewInterface;
+import oob.lolprofile.HomeComponent.Framework.Fragment.Option.DependencyInjection.OptionsFragmentScopeInterface;
 import retrofit2.Retrofit;
 
 @Module

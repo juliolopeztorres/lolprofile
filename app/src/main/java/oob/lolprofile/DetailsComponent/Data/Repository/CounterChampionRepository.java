@@ -1,10 +1,11 @@
-package oob.lolprofile.DetailsComponent.Data;
+package oob.lolprofile.DetailsComponent.Data.Repository;
 
 import android.support.annotation.NonNull;
 import java.util.ArrayList;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
-import oob.lolprofile.DetailsComponent.Domain.CounterChampionRepositoryInterface;
+import oob.lolprofile.DetailsComponent.Data.CounterChampionClientServiceInterface;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.CounterChampionRepositoryInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

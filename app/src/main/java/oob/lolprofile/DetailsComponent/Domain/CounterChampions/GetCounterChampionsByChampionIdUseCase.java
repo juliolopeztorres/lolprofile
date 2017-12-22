@@ -1,9 +1,8 @@
-package oob.lolprofile.DetailsComponent.Domain;
+package oob.lolprofile.DetailsComponent.Domain.CounterChampions;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
 
 public class GetCounterChampionsByChampionIdUseCase implements CounterChampionRepositoryInterface.CounterChampionCallback {
     private ViewInterface viewInterface;

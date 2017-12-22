@@ -1,4 +1,4 @@
-package oob.lolprofile.HomeComponent.Framework.Fragment.Adapter;
+package oob.lolprofile.HomeComponent.Framework.Fragment.Champion.Adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import oob.lolprofile.R;
 
 public class ChampionAdapter extends BaseAdapter {
