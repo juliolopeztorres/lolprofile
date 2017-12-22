@@ -8,7 +8,6 @@
             app:showAsAction="never" />
         <item
             android:id="@+id/menu_details_silver"
-            android:checked="true"
             android:title="@string/menu_details_silver_label"
             app:showAsAction="never" />
         <item
