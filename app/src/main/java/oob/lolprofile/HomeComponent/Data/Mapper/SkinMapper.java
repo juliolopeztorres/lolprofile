@@ -3,7 +3,7 @@ package oob.lolprofile.HomeComponent.Data.Mapper;
 import com.google.gson.JsonObject;
 
 import oob.lolprofile.HomeComponent.Data.Model.SkinRow;
-import oob.lolprofile.HomeComponent.Domain.Model.Skin;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Skin;
 
 class SkinMapper {
     static Skin parseSkin(JsonObject skinResponse) {

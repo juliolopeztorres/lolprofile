@@ -2,7 +2,7 @@ package oob.lolprofile.HomeComponent.Data;
 
 import java.util.ArrayList;
 
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;

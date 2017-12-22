@@ -8,7 +8,7 @@ import java.util.Map;
 
 import io.realm.RealmResults;
 import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 
 public class ChampionCollectionMapper {
     static ArrayList<Champion> parseChampionsResponse(JsonObject ritoChampionResponse) {

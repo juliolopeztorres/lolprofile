@@ -7,9 +7,9 @@ import java.util.Random;
 
 import oob.lolprofile.HomeComponent.Data.Mapper.ChampionCollectionMapper;
 import oob.lolprofile.HomeComponent.Data.NoChampionsFoundDBException;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
-import oob.lolprofile.HomeComponent.Domain.ChampionRepositoryInterface;
-import oob.lolprofile.HomeComponent.Domain.Model.Skin;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.ChampionRepositoryInterface;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Skin;
 
 public class ChampionMockRepository implements ChampionRepositoryInterface {
 
