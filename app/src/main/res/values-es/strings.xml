@@ -22,4 +22,13 @@
     <string name="counter_champion_rate_wins">%s%% - %s victorias</string>
     <string name="no_counters_found">No hay información para el nivel seleccionado :(</string>
     <string name="message_data_not_found">No hay datos almacenados :S</string>
+    <string name="options_delete_saved_data_title">Eliminar datos guardados</string>
+    <string name="options_delete_saved_data_description">La app almacena algunos datos repetitivos/no cambian con frecuencia (nombres, avatares, descripciones de los campeones, etc.) para ahorrar MB/peticiones. Pulsa esta opción si deseas eliminarlos.</string>
+    <string name="options_choose_default_elo_title">Escoge liga por defecto</string>
+    <string name="options_choose_default_elo_description">La liga por defecto es PLATA. Puedes elegir la que desees que se muestre primero seleccionándola aquí.</string>
+    <string name="options_dialog_delete_title">Eliminar</string>
+    <string name="options_dialog_delete_description">¿Estás seguro de que quieres borrar los datos almacenados?</string>
+    <string name="options_dialog_delete_positive_text">Sip</string>
+    <string name="options_dialog_delete_negative_text">Nop</string>
+    <string name="options_message_data_deleted">¡Todos los datos fueron eliminados!</string>
 </resources>
