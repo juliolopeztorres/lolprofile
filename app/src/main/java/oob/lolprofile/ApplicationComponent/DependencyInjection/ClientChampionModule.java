@@ -11,7 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import oob.lolprofile.DetailsComponent.Data.Mapper.CounterChampionResponseMapper;
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

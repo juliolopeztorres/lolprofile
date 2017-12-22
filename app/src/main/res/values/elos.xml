@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="elo_labels">
+        <item>@string/menu_details_bronze_label</item>￼
+        <item>@string/menu_details_silver_label</item>￼
+        <item>@string/menu_details_gold_label</item>￼
+        <item>@string/menu_details_platinum_label</item>￼
+        <item>@string/menu_details_high_elo_label</item>￼
+    </string-array>
+
+    <string-array name="elo_keys">
+        <item>@string/elo_key_bronze</item>
+        <item>@string/elo_key_silver</item>
+        <item>@string/elo_key_gold</item>
+        <item>@string/elo_key_platinum</item>
+        <item>@string/elo_key_high_elo</item>
+    </string-array>
+</resources>

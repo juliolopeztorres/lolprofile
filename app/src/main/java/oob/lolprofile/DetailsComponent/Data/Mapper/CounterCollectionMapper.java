@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.Counter;
 
 class CounterCollectionMapper {
     static ArrayList<Counter> parseCounters(JsonArray matchUp, int currentChampId) {

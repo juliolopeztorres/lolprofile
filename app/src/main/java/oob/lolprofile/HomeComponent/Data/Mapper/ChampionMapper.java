@@ -3,7 +3,7 @@ package oob.lolprofile.HomeComponent.Data.Mapper;
 import com.google.gson.JsonObject;
 
 import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 
 class ChampionMapper {
     static Champion parseChampionResponse(JsonObject championResponse) {

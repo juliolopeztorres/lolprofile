@@ -2,7 +2,7 @@ package oob.lolprofile.DetailsComponent.Data.Mapper;
 
 import com.google.gson.JsonObject;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.Counter;
 
 class CounterMapper {
     static Counter parseCounters(JsonObject matchUp, int currentChampId) {

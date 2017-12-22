@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
 
 class ChampionRoleCounterCollectionMapper {
     static ArrayList<ChampionRoleCounter> parseCounterChampionResponse(JsonArray championResponse) {

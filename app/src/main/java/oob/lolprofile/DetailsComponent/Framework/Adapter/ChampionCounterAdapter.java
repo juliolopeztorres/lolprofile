@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.Counter;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import oob.lolprofile.R;
 import oob.lolprofile.Util.DoubleOperation;
 

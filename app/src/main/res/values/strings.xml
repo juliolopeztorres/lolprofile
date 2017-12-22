@@ -39,4 +39,15 @@
     <string name="no_counters_found">There is no counters info for ELO selected :(</string>
     <string name="elo_default_key">SILVER</string>
     <string name="message_data_not_found">No data found in bundle! :S</string>
+    <string name="options_delete_saved_data_title">Delete saved data</string>
+    <string name="options_delete_saved_data_description">The app stores some ordinary data/don\'t usually change (as champion names, avatar, description, etc.) in order to save MB/Internet request. Check this option if you want to delete it all.</string>
+    <string name="options_choose_default_elo_title">Choose default ELO</string>
+    <string name="options_choose_default_elo_description">App\'s default ELO is SILVER. You can choose whatever you want to show first by selecting one here.</string>
+    <string name="key_default_stored_elo">defaultELOString</string>
+    <string name="options_dialog_delete_title">Delete</string>
+    <string name="options_dialog_delete_description">Are you sure you want to delete stored data?</string>
+    <string name="options_dialog_delete_positive_text">Sure</string>
+    <string name="options_dialog_delete_negative_text">Nope</string>
+    <string name="options_message_data_deleted">All data was deleted</string>
+    <string name="string_elo_key_not_found">NOPE</string>
 </resources>

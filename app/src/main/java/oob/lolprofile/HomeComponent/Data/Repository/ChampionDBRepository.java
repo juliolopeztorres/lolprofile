@@ -8,8 +8,9 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
 import oob.lolprofile.HomeComponent.Data.NoChampionsFoundDBException;
+import oob.lolprofile.HomeComponent.Domain.DeleteStoredData.ChampionDBInterface;
 
-public class ChampionDBRepository {
+public class ChampionDBRepository implements ChampionDBInterface {
     private Realm realm;
 
     public ChampionDBRepository(Realm realm) {
@@ -34,13 +35,14 @@ public class ChampionDBRepository {
         });
     }
 
-    void removeAll() {
+
+    @Override
+    public void removeAll() {
         this.realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(@NonNull Realm realm) {
                 realm.deleteAll();
             }
         });
-
     }
 }

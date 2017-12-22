@@ -2,7 +2,7 @@ package oob.lolprofile.DetailsComponent.Data.Mapper;
 
 import com.google.gson.JsonObject;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
 
 class ChampionRoleCounterMapper {
     static ChampionRoleCounter parseChampionRoleCounter(JsonObject championRoleCounterResponse) {

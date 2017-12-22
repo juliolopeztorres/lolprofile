@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Map;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.RoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.RoleCounter;
 
 class RoleCounterCollectionMapper {
     static ArrayList<RoleCounter> parseRoleCounters(JsonObject matchUps, int currentChampId) {

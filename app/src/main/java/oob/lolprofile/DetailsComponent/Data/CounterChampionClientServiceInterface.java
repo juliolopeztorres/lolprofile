@@ -2,7 +2,7 @@ package oob.lolprofile.DetailsComponent.Data;
 
 import java.util.ArrayList;
 
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;

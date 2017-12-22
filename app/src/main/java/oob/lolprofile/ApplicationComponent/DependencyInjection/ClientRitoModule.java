@@ -11,7 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import oob.lolprofile.HomeComponent.Data.Mapper.ChampionResponseMapper;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

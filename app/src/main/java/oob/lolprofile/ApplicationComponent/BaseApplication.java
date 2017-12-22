@@ -1,6 +1,8 @@
 package oob.lolprofile.ApplicationComponent;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+
 import oob.lolprofile.ApplicationComponent.DependencyInjection.BaseApplicationComponentInterface;
 import oob.lolprofile.ApplicationComponent.DependencyInjection.CacheModule;
 import oob.lolprofile.ApplicationComponent.DependencyInjection.ClientChampionModule;
@@ -34,6 +36,16 @@ public class BaseApplication extends Application {
                 .localDBModule(new LocalDBModule(this))
                 .preferencesModule(new PreferencesModule(this, getString(R.string.shared_preferences_name)))
                 .build();
+
+        this.setDefaultELO();
+    }
+
+    private void setDefaultELO() {
+        SharedPreferences sharedPreferences = this.component.getPreferences();
+        String defaultELO = sharedPreferences.getString(getString(R.string.key_default_stored_elo), getString(R.string.string_elo_key_not_found));
+        if (defaultELO.equals(getString(R.string.string_elo_key_not_found))) {
+            sharedPreferences.edit().putString(getString(R.string.key_default_stored_elo), getString(R.string.elo_default_key)).apply();
+        }
     }
 
     public BaseApplicationComponentInterface getComponent() {

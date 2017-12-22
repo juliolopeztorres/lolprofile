@@ -1,6 +1,7 @@
 package oob.lolprofile.DetailsComponent.Framework;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,15 +25,16 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import oob.lolprofile.ApplicationComponent.BaseApplication;
-import oob.lolprofile.DetailsComponent.Domain.Model.ChampionRoleCounter;
-import oob.lolprofile.DetailsComponent.Domain.GetCounterChampionsByChampionIdUseCase;
-import oob.lolprofile.DetailsComponent.Domain.Model.Counter;
-import oob.lolprofile.DetailsComponent.Domain.ViewInterface;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.GetCounterChampionsByChampionIdUseCase;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.Counter;
+import oob.lolprofile.DetailsComponent.Domain.CounterChampions.ViewInterface;
+import oob.lolprofile.DetailsComponent.Domain.DefaultELO.GetDefaultELOUseCase;
 import oob.lolprofile.DetailsComponent.Framework.Adapter.ChampionCounterAdapter;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DaggerDetailsActivityComponentInterface;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityComponentInterface;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityModule;
-import oob.lolprofile.HomeComponent.Domain.Model.Champion;
+import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import oob.lolprofile.R;
 import oob.lolprofile.Util.DoubleOperation;
 import oob.lolprofile.Util.ExpandableHeightGridView;
@@ -68,11 +70,15 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
 
     @Inject
     GetCounterChampionsByChampionIdUseCase getCounterChampionsByChampionIdUseCase;
+    @Inject
+    GetDefaultELOUseCase getDefaultELOUseCase;
 
     private int rowCounters;
     private ArrayList<ChampionRoleCounter> championRoleCounters;
     private ArrayList<Champion> champions;
     private Champion championClicked;
+    private String[] elo_keys;
+    private String defaultELO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +88,12 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
 
         this.component = DaggerDetailsActivityComponentInterface.builder()
                 .baseApplicationComponentInterface(((BaseApplication) this.getApplication()).getComponent())
-                .detailsActivityModule(new DetailsActivityModule(this, getString(R.string.api_key_champion)))
+                .detailsActivityModule(new DetailsActivityModule(this, getString(R.string.api_key_champion), getString(R.string.key_default_stored_elo)))
                 .build();
         this.component.inject(this);
+
+        this.elo_keys = getResources().getStringArray(R.array.elo_keys);
+        this.defaultELO = this.getDefaultELOUseCase.getDefaultELO();
 
         if (!this.recoverParamsFromBundle()) {
             this.showError(getString(R.string.message_data_not_found));
@@ -101,7 +110,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
     protected void onResume() {
         super.onResume();
         this.setChampionInfo();
-        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championClicked.getId(), getString(R.string.elo_default_key));
+        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championClicked.getId(), this.defaultELO);
     }
 
     private boolean recoverParamsFromBundle() {
@@ -140,6 +149,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_details_activity, menu);
+        menu.getItem(this.getELOKeyPosition(this.defaultELO)).setChecked(true);
         return true;
     }
 
@@ -288,5 +298,16 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
         bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
         it.putExtras(bundle);
         startActivity(it);
+    }
+
+    private int getELOKeyPosition(String elo) {
+        int length = this.elo_keys.length;
+        for(int i = 0; i < length; i++) {
+            if (this.elo_keys[i].equals(elo)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
