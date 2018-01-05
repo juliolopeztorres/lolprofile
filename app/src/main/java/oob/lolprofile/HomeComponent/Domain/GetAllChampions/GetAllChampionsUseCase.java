@@ -35,4 +35,9 @@ public class GetAllChampionsUseCase implements ChampionRepositoryInterface.Champ
     public void onError(String text) {
         this.viewInterface.showError(text);
     }
+
+    @Override
+    public void onError() {
+        this.viewInterface.showError();
+    }
 }

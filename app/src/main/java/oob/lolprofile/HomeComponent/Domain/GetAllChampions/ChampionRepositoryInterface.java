@@ -17,5 +17,7 @@ public interface ChampionRepositoryInterface {
         void onSuccess(ArrayList<Champion> champions);
 
         void onError(String text);
+
+        void onError();
     }
 }

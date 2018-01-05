@@ -40,7 +40,8 @@
     <string name="elo_key_high_elo"></string>
     <string name="no_counters_found">There is no counters info for ELO selected :(</string>
     <string name="elo_default_key">SILVER</string>
-    <string name="message_data_not_found">No data found in bundle! :S</string>
+    <string name="message_data_not_found_in_bundle">No data found in bundle! :S</string>
+    <string name="message_data_not_found_in_server">LP001 - Error retrieving Champions from server. Code was OK but no data was found! :(</string>
     <string name="options_delete_saved_data_title">Delete saved data</string>
     <string name="options_delete_saved_data_description">The app stores some ordinary data/don\'t usually change (as champion names, avatar, description, etc.) in order to save MB/Internet request. Check this option if you want to delete it all.</string>
     <string name="options_choose_default_elo_title">Choose default ELO</string>

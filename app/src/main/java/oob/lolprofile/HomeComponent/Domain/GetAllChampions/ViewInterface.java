@@ -8,4 +8,6 @@ public interface ViewInterface {
     void showChampions(ArrayList<Champion> champions);
 
     void showError(String text);
+
+    void showError();
 }

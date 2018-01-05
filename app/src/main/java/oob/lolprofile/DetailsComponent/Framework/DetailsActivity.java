@@ -1,7 +1,6 @@
 package oob.lolprofile.DetailsComponent.Framework;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -96,7 +95,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
         this.defaultELO = this.getDefaultELOUseCase.getDefaultELO();
 
         if (!this.recoverParamsFromBundle()) {
-            this.showError(getString(R.string.message_data_not_found));
+            this.showError(getString(R.string.message_data_not_found_in_bundle));
             return;
         }
 

@@ -97,9 +97,14 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
 
     @Override
     public void showError(String text) {
-        Toast.makeText(this.context, text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.context, text, Toast.LENGTH_LONG).show();
         this.progressBar.setVisibility(View.GONE);
         this.imageViewSadFace.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showError() {
+        this.showError(getString(R.string.message_data_not_found_in_server));
     }
 
     public void filterChampsByName(String champName) {
