@@ -56,6 +56,10 @@ public class ChampionRepository implements ChampionRepositoryInterface {
         serviceCall.enqueue(new Callback<ArrayList<Champion>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<Champion>> call, @NonNull Response<ArrayList<Champion>> response) {
+                if (response.code() != 200 && null == response.body()) {
+                    callback.onError();
+                    return;
+                }
                 ArrayList<Champion> champions = response.body();
                 championDBRepository.setAll(
                         ChampionCollectionMapper.parseChampionsToRealm(champions)
