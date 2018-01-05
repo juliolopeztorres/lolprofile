@@ -2,9 +2,9 @@ LoL Profile
 ==============
 
 LoL Profile is a simple android application that shows you information
-about different champions matchup between them.
+about different [MOBA League of Legends](https://leagueoflegends.com) champions matchup between them.
 
-You have just to click or search in your main champion, choose your 
+You just have to click or search in your main champion, choose your 
 ELO - default is SILVER - ELO HELL :_(, and see the 6 best and worst matchup 
 champions. 
  
@@ -15,16 +15,30 @@ Check this app out on:
 - [Google play](https://play.google.com/store/apps/details?id=oob.lolprofile)
 - [Youtube](https://youtu.be/bMbBYzfjqn8)
 
-Any comment would be welcome.
+Any comment will be welcome.
 
 Enjoy!
  
 # Usage
 
-Clone the repo, rename res/values/keys_mock.xml to res/values/keys.xml 
+Clone the repo, rename `res/values/keys_mock.xml` to `res/values/keys.xml` 
 and update your API keys from Riot and Champion.gg API.
 
-Note: current version does not need Riot Backend API key, you can 
+```xml
+file: res/values/keys.xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <!-- REMOVE _mock suffix from api_key_rito_mock/api_key_champion_mock keys in your keys.xml -->
+    <!-- Please see https://developer.riotgames.com -->
+    <string name="api_key_rito_mock">PUT YOUR API KEY HERE</string>
+    <!-- Please see http://api.champion.gg/docs -->
+    <string name="api_key_champion_mock">PUT YOUR API KEY HERE</string>
+</resources>
+```
+
+Note: current master version does not need Riot Backend API key, you can 
 just leave it blank.
 
 # Developer notes
