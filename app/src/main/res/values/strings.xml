@@ -1,6 +1,55 @@
-<resources>
-    <string name="app_name">LoLProfile</string>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="app_name">LoL Profile</string>
     <string name="cache_name">CacheLoLProfile</string>
+    <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
     <string name="base_url_rito">https://euw1.api.riotgames.com/lol/static-data/v3/</string>
+    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/%s</string>
+    <string name="base_url_champion_splash">http://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
+
+    <!-- TOOLBAR -->
+    <string name="toolbar_elevation">4dp</string>
+    <string name="content_description_champion_image_placeholder">Champion\'s placeholder image</string>
+    <string name="content_description_sad_face">An error has occurred :(</string>
+    <string name="activity_home_title">Champions</string>
+    <string name="key_seconds_last_request">UnixSecondsLastRequest</string>
+    <string name="content_description_background">Nice LoL related background image</string>
+    <string name="menu_champions_label">Champions</string>
+    <string name="menu_summoner_label">Summoner</string>
+    <string name="menu_option_label">Options</string>
+    <string name="menu_search_label">Search</string>
+    <string name="transition_champion_details">Champion\'s transition</string>
+    <string name="textView_counter_label">Counters</string>
+    <string name="textView_goodAgainst_label">Good against</string>
+    <string name="textView_lore_label">Lore</string>
+    <string name="menu_details_bronze_label">BRONZE</string>
+    <string name="menu_details_silver_label">SILVER</string>
+    <string name="menu_details_gold_label">GOLD</string>
+    <string name="menu_details_platinum_label">PLATINUM</string>
+    <string name="menu_details_high_elo_label">HIGH ELO</string>
+    <string name="champion_games">%s games</string>
+    <string name="champion_win_rate">%s%% WR</string>
+    <string name="champion_kda">%s/%s/%s</string>
+    <string name="counter_champion_rate_wins">%s%% - %s wins</string>
+    <string name="elo_key_bronze">BRONZE</string>
+    <string name="elo_key_silver">SILVER</string>
+    <string name="elo_key_gold">GOLD</string>
+    <string name="elo_key_platinum">PLATINUM</string>
+    <string name="elo_key_high_elo"></string>
+    <string name="no_counters_found">There is no counters info for ELO selected :(</string>
+    <string name="elo_default_key">SILVER</string>
+    <string name="message_data_not_found">No data found in bundle! :S</string>
+    <string name="options_delete_saved_data_title">Delete saved data</string>
+    <string name="options_delete_saved_data_description">The app stores some ordinary data/don\'t usually change (as champion names, avatar, description, etc.) in order to save MB/Internet request. Check this option if you want to delete it all.</string>
+    <string name="options_choose_default_elo_title">Choose default ELO</string>
+    <string name="options_choose_default_elo_description">App\'s default ELO is SILVER. You can choose whatever you want to show first by selecting one here.</string>
+    <string name="key_default_stored_elo">defaultELOString</string>
+    <string name="options_dialog_delete_title">Delete</string>
+    <string name="options_dialog_delete_description">Are you sure you want to delete stored data?</string>
+    <string name="options_dialog_delete_positive_text">Sure</string>
+    <string name="options_dialog_delete_negative_text">Nope</string>
+    <string name="options_message_data_deleted">All data was deleted</string>
+    <string name="string_elo_key_not_found">NOPE</string>
 </resources>

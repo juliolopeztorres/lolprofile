@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <!-- REMOVE _mock suffix from api_key_rito_mock/api_key_champion_mock keys in your keys.xml -->
     <!-- Please see https://developer.riotgames.com -->
-    <string name="api_key_rito">PUT YOUR API KEY HERE</string>
+    <string name="api_key_rito_mock">PUT YOUR API KEY HERE</string>
     <!-- Please see http://api.champion.gg/docs -->
-    <string name="api_key_champion">PUT YOUR API KEY HERE</string>
+    <string name="api_key_champion_mock">PUT YOUR API KEY HERE</string>
 </resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_details_bronze"
+            android:title="@string/menu_details_bronze_label"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/menu_details_silver"
+            android:title="@string/menu_details_silver_label"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/menu_details_gold"
+            android:title="@string/menu_details_gold_label"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/menu_details_platinum"
+            android:title="@string/menu_details_platinum_label"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/menu_details_high_elo"
+            android:title="@string/menu_details_high_elo_label"
+            app:showAsAction="never" />
+    </group>
+</menu>

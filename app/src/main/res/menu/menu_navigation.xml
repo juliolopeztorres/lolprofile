@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_champions"
+            android:icon="@drawable/ic_champions"
+            android:checked="true"
+            android:title="@string/menu_champions_label" />
+        <item
+            android:id="@+id/menu_summoner"
+            android:icon="@drawable/ic_summoner"
+            android:visible="false"
+            android:title="@string/menu_summoner_label" />
+        <item
+            android:id="@+id/menu_options"
+            android:icon="@drawable/ic_options"
+            android:title="@string/menu_option_label" />
+    </group>
+</menu>

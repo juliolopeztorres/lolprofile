@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom|right"
+    android:orientation="vertical"
+    android:paddingBottom="35dp"
+    android:paddingRight="20dp"
+    tools:showIn="@layout/activity_details">
+
+    <TextView
+        android:id="@+id/textViewChampionKDA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/champion_kda"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewChampionWinRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        android:text="@string/champion_win_rate"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewChampionWinGames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        android:text="@string/champion_games"
+        android:textStyle="bold" />
+
+</LinearLayout>
