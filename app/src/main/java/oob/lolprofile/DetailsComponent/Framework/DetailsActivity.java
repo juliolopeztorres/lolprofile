@@ -296,6 +296,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
         bundle.putSerializable(DetailsActivity.KEY_CHAMPIONS, champions);
         bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
         it.putExtras(bundle);
+        it.setFlags(it.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(it);
     }
 
