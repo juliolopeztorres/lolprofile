@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-// @See https://stackoverflow.com/questions/8481844/gridview-height-gets-cut
+// @See https://stackoverflow.com/a/8483078
 public class ExpandableHeightGridView extends GridView {
 
     boolean expanded = false;
