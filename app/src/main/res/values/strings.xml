@@ -1,11 +1,11 @@
 <resources
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
-    <string name="app_name">LoL Profile</string>
+    <string name="app_name">LoL Counter</string>
     <string name="cache_name">CacheLoLProfile</string>
     <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
-    <string name="base_url_rito">https://euw1.api.riotgames.com/lol/static-data/v3/</string>
+    <string name="base_url_rito">https://guerra-barcos.tk/lolprofile/</string>
     <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/%s</string>
     <string name="base_url_champion_splash">http://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
 
@@ -40,7 +40,8 @@
     <string name="elo_key_high_elo"></string>
     <string name="no_counters_found">There is no counters info for ELO selected :(</string>
     <string name="elo_default_key">SILVER</string>
-    <string name="message_data_not_found">No data found in bundle! :S</string>
+    <string name="message_data_not_found_in_bundle">No data found in bundle! :S</string>
+    <string name="message_data_not_found_in_server">LP001 - Error retrieving Champions from server. Code was OK but no data was found! :(</string>
     <string name="options_delete_saved_data_title">Delete saved data</string>
     <string name="options_delete_saved_data_description">The app stores some ordinary data/don\'t usually change (as champion names, avatar, description, etc.) in order to save MB/Internet request. Check this option if you want to delete it all.</string>
     <string name="options_choose_default_elo_title">Choose default ELO</string>

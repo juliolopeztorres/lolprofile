@@ -14,8 +14,6 @@ public interface ChampionClientServiceInterface {
 
     @Headers({CONTENT_TYPE, ACCEPT})
     @GET("champions")
-    // SEE https://www.mocky.io/ for below
-    // @GET("5a37b8f53200005f13eb6a79")
     Call<ArrayList<Champion>> getAll(
             @Query("locale") String locale,
             @Query("dataById") boolean dataById,
