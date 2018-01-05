@@ -1,5 +1,7 @@
-<resources>
-    <string name="app_name">LoLProfile</string>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="app_name">LoL Profile</string>
     <string name="cache_name">CacheLoLProfile</string>
     <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
