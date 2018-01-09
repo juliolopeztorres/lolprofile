@@ -225,7 +225,7 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
     }
 
     private void setTabLabels(ArrayList<String> tabLabels) {
-        if (this.tabLayout.getTabCount() > 0) {
+        if (this.tabLayout.getTabCount() > 0 && this.tabLayout.getTabCount() == tabLabels.size()) {
             TabLayout.Tab tabSelected = this.tabLayout.getTabAt(this.tabLayout.getSelectedTabPosition());
             assert tabSelected != null;
 
