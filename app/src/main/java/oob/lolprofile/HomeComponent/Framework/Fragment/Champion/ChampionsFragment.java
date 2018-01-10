@@ -108,7 +108,11 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
     }
 
     public void filterChampsByName(String champName) {
-        this.championAdapter.filterByName(champName);
+        if (this.championAdapter == null) {
+            this.getAllChampionsUseCase.getAll();
+        } else {
+            this.championAdapter.filterByName(champName);
+        }
     }
 
     public void showLoading() {
