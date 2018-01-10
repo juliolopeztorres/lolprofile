@@ -126,6 +126,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         this.viewSearch.setVisibility(View.GONE);
         switch (itemId) {
             case R.id.menu_champions:
+                this.viewSearch.setQuery("", false);
+                this.viewSearch.clearFocus();
                 this.viewSearch.setVisibility(View.VISIBLE);
                 return this.championsFragment;
             case R.id.menu_options:
