@@ -63,7 +63,7 @@ public class ChampionAdapter extends BaseAdapter {
         championViewHolder.getChampionAvatar().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                eventsManagement.onClick(champions, champion);
+                eventsManagement.onClick(champion);
             }
         });
 
@@ -105,6 +105,6 @@ public class ChampionAdapter extends BaseAdapter {
     }
 
     public interface OnChampionEvents {
-        void onClick(ArrayList<Champion> champions, Champion championClicked);
+        void onClick(Champion championClicked);
     }
 }
