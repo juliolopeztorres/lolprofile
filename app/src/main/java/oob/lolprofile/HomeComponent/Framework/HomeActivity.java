@@ -14,9 +14,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import oob.lolprofile.DetailsComponent.Framework.DetailsActivity;
@@ -140,11 +137,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public void onClick(ArrayList<Champion> champions, Champion championClicked) {
+    public void onClick(Champion championClicked) {
         this.championsFragment.showLoading();
         Intent it = new Intent(this, DetailsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(DetailsActivity.KEY_CHAMPIONS, champions);
         bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
         it.putExtras(bundle);
         startActivity(it);

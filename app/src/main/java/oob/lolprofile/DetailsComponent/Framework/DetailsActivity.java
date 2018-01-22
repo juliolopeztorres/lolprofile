@@ -27,21 +27,21 @@ import oob.lolprofile.ApplicationComponent.BaseApplication;
 import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRoleCounter;
 import oob.lolprofile.DetailsComponent.Domain.CounterChampions.GetCounterChampionsByChampionIdUseCase;
 import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.Counter;
-import oob.lolprofile.DetailsComponent.Domain.CounterChampions.ViewInterface;
 import oob.lolprofile.DetailsComponent.Domain.DefaultELO.GetDefaultELOUseCase;
+import oob.lolprofile.DetailsComponent.Domain.GetAllChampions.GetAllChampionsUseCase;
 import oob.lolprofile.DetailsComponent.Framework.Adapter.ChampionCounterAdapter;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DaggerDetailsActivityComponentInterface;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityComponentInterface;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityModule;
+import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DetailsActivityViewInterface;
 import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import oob.lolprofile.R;
 import oob.lolprofile.Util.DoubleOperation;
 import oob.lolprofile.Util.ExpandableHeightGridView;
 import oob.lolprofile.Util.RoleNamesParser;
 
-public class DetailsActivity extends AppCompatActivity implements ViewInterface, TabLayout.OnTabSelectedListener, ChampionCounterAdapter.OnChampionEvents {
+public class DetailsActivity extends AppCompatActivity implements DetailsActivityViewInterface, TabLayout.OnTabSelectedListener, ChampionCounterAdapter.OnChampionEvents {
 
-    public static final String KEY_CHAMPIONS = "champions";
     public static final String KEY_CHAMPION_CLICKED = "championClicked";
 
     DetailsActivityComponentInterface component;
@@ -71,6 +71,8 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
     GetCounterChampionsByChampionIdUseCase getCounterChampionsByChampionIdUseCase;
     @Inject
     GetDefaultELOUseCase getDefaultELOUseCase;
+    @Inject
+    GetAllChampionsUseCase getAllChampionsUseCase;
 
     private int rowCounters;
     private ArrayList<ChampionRoleCounter> championRoleCounters;
@@ -99,17 +101,8 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
             return;
         }
 
-        this.rowCounters = getResources().getInteger(R.integer.grid_view_rows_counters) * getResources().getInteger(R.integer.grid_view_columns_counters);
-        this.tabLayout.addOnTabSelectedListener(this);
-        this.setSupportActionBar(this.toolbar);
-        this.setBackButton();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         this.setChampionInfo();
-        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championClicked.getId(), this.defaultELO);
+        this.getAllChampionsUseCase.getAll();
     }
 
     private boolean recoverParamsFromBundle() {
@@ -117,7 +110,6 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
         if (bundle == null) {
             return false;
         }
-        this.champions = (ArrayList<Champion>) bundle.getSerializable(KEY_CHAMPIONS);
         this.championClicked = ((Champion) bundle.getSerializable(KEY_CHAMPION_CLICKED));
 
         return true;
@@ -220,8 +212,25 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
     }
 
     @Override
+    public void showChampions(ArrayList<Champion> champions) {
+        this.champions = champions;
+
+        this.rowCounters = getResources().getInteger(R.integer.grid_view_rows_counters) * getResources().getInteger(R.integer.grid_view_columns_counters);
+        this.tabLayout.addOnTabSelectedListener(this);
+        this.setSupportActionBar(this.toolbar);
+        this.setBackButton();
+
+        this.getCounterChampionsByChampionIdUseCase.getCountersByChampionId(this.championClicked.getId(), this.defaultELO);
+    }
+
+    @Override
     public void showError(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError() {
+        this.showError(getString(R.string.content_description_sad_face));
     }
 
     private void setTabLabels(ArrayList<String> tabLabels) {
@@ -290,10 +299,9 @@ public class DetailsActivity extends AppCompatActivity implements ViewInterface,
     }
 
     @Override
-    public void onClick(ArrayList<Champion> champions, Champion championClicked) {
+    public void onClick(Champion championClicked) {
         Intent it = new Intent(this, DetailsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(DetailsActivity.KEY_CHAMPIONS, champions);
         bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
         it.putExtras(bundle);
         it.setFlags(it.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
