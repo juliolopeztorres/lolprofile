@@ -8,4 +8,6 @@ public interface ViewInterface {
     void showCounters(ArrayList<ChampionRoleCounter> championsRoleCounter);
 
     void showError(String text);
+
+    void showError();
 }

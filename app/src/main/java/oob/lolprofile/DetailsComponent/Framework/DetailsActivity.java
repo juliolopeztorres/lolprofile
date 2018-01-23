@@ -230,7 +230,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
     @Override
     public void showError() {
-        this.showError(getString(R.string.content_description_sad_face));
+        this.showError(getString(R.string.message_data_not_found_in_server_details));
     }
 
     private void setTabLabels(ArrayList<String> tabLabels) {
