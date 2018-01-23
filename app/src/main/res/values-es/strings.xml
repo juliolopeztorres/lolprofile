@@ -23,6 +23,7 @@
     <string name="no_counters_found">No hay información para el nivel seleccionado :(</string>
     <string name="message_data_not_found_in_bundle">No hay datos almacenados :S</string>
     <string name="message_data_not_found_in_server">LP001 - Error recuperando los campeones del servidor. El código fue bueno pero no hubo datos en la respuesta! :(</string>
+    <string name="message_data_not_found_in_server_details">LP002 - Error recuperando los campeones del servidor. El código fue bueno pero no hubo datos en la respuesta! :(</string>
     <string name="options_delete_saved_data_title">Eliminar datos guardados</string>
     <string name="options_delete_saved_data_description">La app almacena algunos datos repetitivos/no cambian con frecuencia (nombres, avatares, descripciones de los campeones, etc.) para ahorrar MB/peticiones. Pulsa esta opción si deseas eliminarlos.</string>
     <string name="options_choose_default_elo_title">Escoge liga por defecto</string>

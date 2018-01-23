@@ -26,4 +26,9 @@ public class GetCounterChampionsByChampionIdUseCase implements CounterChampionRe
     public void onError(String text) {
         this.viewInterface.showError(text);
     }
+
+    @Override
+    public void onError() {
+        this.viewInterface.showError();
+    }
 }

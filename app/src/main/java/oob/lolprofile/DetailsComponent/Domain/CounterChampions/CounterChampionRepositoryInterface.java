@@ -11,5 +11,7 @@ public interface CounterChampionRepositoryInterface {
         void onSuccess(ArrayList<ChampionRoleCounter> champions);
 
         void onError(String text);
+
+        void onError();
     }
 }

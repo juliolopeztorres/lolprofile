@@ -33,6 +33,10 @@ public class CounterChampionRepository implements CounterChampionRepositoryInter
         serviceCall.enqueue(new Callback<ArrayList<ChampionRoleCounter>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<ChampionRoleCounter>> call, @NonNull Response<ArrayList<ChampionRoleCounter>> response) {
+                if (response.code() != 200 || null == response.body()) {
+                    callback.onError();
+                    return;
+                }
                 ArrayList<ChampionRoleCounter> champions = response.body();
                 callback.onSuccess(champions);
             }
