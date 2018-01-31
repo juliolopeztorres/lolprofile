@@ -5,7 +5,7 @@
     <string name="cache_name">CacheLoLProfile</string>
     <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
-    <string name="base_url_rito">https://guerra-barcos.tk/lolprofile/</string>
+    <string name="base_url_rito">https://euw1.api.riotgames.com/lol/static-data/v3/</string>
     <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/%s</string>
     <string name="base_url_champion_splash">http://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
 
