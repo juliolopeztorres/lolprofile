@@ -3,6 +3,7 @@ package oob.lolprofile.HomeComponent.Framework.Fragment.Option;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
 import oob.lolprofile.ApplicationComponent.BaseApplication;
 import oob.lolprofile.HomeComponent.Domain.DefaultELO.GetDefaultELOUseCase;
 import oob.lolprofile.HomeComponent.Domain.DefaultELO.SetDefaultELOUseCase;
+import oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.GetDefaultRowNumberUseCase;
+import oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.SetDefaultRowNumberUseCase;
 import oob.lolprofile.HomeComponent.Domain.DeleteStoredData.DeleteStoredDataUseCase;
 import oob.lolprofile.HomeComponent.Framework.Fragment.Option.DependencyInjection.DaggerOptionsFragmentComponentInterface;
 import oob.lolprofile.HomeComponent.Framework.Fragment.Option.DependencyInjection.OptionsFragmentComponentInterface;
@@ -36,6 +39,8 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     Spinner spinnerDefaultELO;
     @BindView(R.id.switchDeleteStoredData)
     Switch switchDeleteStoredData;
+    @BindView(R.id.spinnerDefaultRowNumber)
+    Spinner spinnerDefaultRowNumber;
 
     @Inject
     GetDefaultELOUseCase getDefaultELOUseCase;
@@ -43,14 +48,19 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     SetDefaultELOUseCase setDefaultELOUseCase;
     @Inject
     DeleteStoredDataUseCase deleteStoredDataUseCase;
+    @Inject
+    GetDefaultRowNumberUseCase getDefaultRowNumberUseCase;
+    @Inject
+    SetDefaultRowNumberUseCase setDefaultRowNumberUseCase;
 
     private String[] elo_keys;
+    private String[] row_numbers;
 
     public OptionsFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
         ButterKnife.bind(this, view);
@@ -58,14 +68,24 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         this.context = view.getContext();
         this.component = DaggerOptionsFragmentComponentInterface.builder()
                 .baseApplicationComponentInterface(((BaseApplication) this.context.getApplicationContext()).getComponent())
-                .optionsFragmentModule(new OptionsFragmentModule(getString(R.string.key_default_stored_elo)))
+                .optionsFragmentModule(new OptionsFragmentModule(getString(R.string.key_default_stored_elo), getString(R.string.key_default_stored_row_number)))
                 .build();
         this.component.inject(this);
 
         this.elo_keys = getResources().getStringArray(R.array.elo_keys);
+        this.row_numbers = getResources().getStringArray(R.array.row_numbers);
 
         this.spinnerDefaultELO.setOnItemSelectedListener(this);
         this.switchDeleteStoredData.setOnCheckedChangeListener(this);
+        this.spinnerDefaultRowNumber.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                OptionsFragment.this.setDefaultRowNumberUseCase.setDefaultRowNumber(OptionsFragment.this.row_numbers[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         return view;
     }
@@ -74,15 +94,20 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     public void onResume() {
         super.onResume();
         this.spinnerDefaultELO.setSelection(
-                this.getELOKeyPosition(this.getDefaultELOUseCase.getDefaultELO()),
+                this.getValuePosition(this.getDefaultELOUseCase.getDefaultELO(), this.elo_keys),
+                false
+        );
+
+        this.spinnerDefaultRowNumber.setSelection(
+                this.getValuePosition(this.getDefaultRowNumberUseCase.getDefaultRowNumber(), this.row_numbers),
                 false
         );
     }
 
-    private int getELOKeyPosition(String elo) {
-        int length = this.elo_keys.length;
+    private int getValuePosition(String value, String[] array) {
+        int length = array.length;
         for(int i = 0; i < length; i++) {
-            if (this.elo_keys[i].equals(elo)) {
+            if (array[i].equals(value)) {
                 return i;
             }
         }

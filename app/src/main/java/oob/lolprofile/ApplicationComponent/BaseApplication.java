@@ -38,13 +38,22 @@ public class BaseApplication extends Application {
                 .build();
 
         this.setDefaultELO();
+        this.setDefaultRowNumber();
     }
 
     private void setDefaultELO() {
         SharedPreferences sharedPreferences = this.component.getPreferences();
-        String defaultELO = sharedPreferences.getString(getString(R.string.key_default_stored_elo), getString(R.string.string_elo_key_not_found));
-        if (defaultELO.equals(getString(R.string.string_elo_key_not_found))) {
+        String defaultELO = sharedPreferences.getString(getString(R.string.key_default_stored_elo), "");
+        if (defaultELO.isEmpty()) {
             sharedPreferences.edit().putString(getString(R.string.key_default_stored_elo), getString(R.string.elo_default_key)).apply();
+        }
+    }
+
+    private void setDefaultRowNumber() {
+        SharedPreferences sharedPreferences = this.component.getPreferences();
+        String defaultRowNumber = sharedPreferences.getString(getString(R.string.key_default_stored_row_number), "");
+        if (defaultRowNumber.isEmpty()) {
+            sharedPreferences.edit().putString(getString(R.string.key_default_stored_row_number), getString(R.string.row_number_default_key)).apply();
         }
     }
 

@@ -33,4 +33,6 @@
     <string name="options_dialog_delete_positive_text">Sip</string>
     <string name="options_dialog_delete_negative_text">Nop</string>
     <string name="options_message_data_deleted">¡Todos los datos fueron eliminados!</string>
+    <string name="options_choose_default_row_number_title">Número de filas (detalles)</string>
+    <string name="options_choose_row_number_description">Define el número de líneas mostradas en los detalles del campeón. Ya que League of Legends tiene tantos campeones, no tiene sentido mostrar todas las tasas de victoria de los contrarios. Las filas están limitadas entre 2 y 4 (desde 6 hasta 12 campeones mostrados).</string>
 </resources>
