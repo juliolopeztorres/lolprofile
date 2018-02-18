@@ -10,6 +10,8 @@ import oob.lolprofile.HomeComponent.Data.Repository.PreferencesRepository;
 import oob.lolprofile.HomeComponent.Domain.DefaultELO.GetDefaultELOUseCase;
 import oob.lolprofile.HomeComponent.Domain.DefaultELO.PreferencesInterface;
 import oob.lolprofile.HomeComponent.Domain.DefaultELO.SetDefaultELOUseCase;
+import oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.GetDefaultRowNumberUseCase;
+import oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.SetDefaultRowNumberUseCase;
 import oob.lolprofile.HomeComponent.Domain.DeleteStoredData.ChampionDBInterface;
 import oob.lolprofile.HomeComponent.Domain.DeleteStoredData.DeleteStoredDataUseCase;
 
@@ -17,9 +19,11 @@ import oob.lolprofile.HomeComponent.Domain.DeleteStoredData.DeleteStoredDataUseC
 public class OptionsFragmentModule {
 
     private String keyDefaultELO;
+    private String keyDefaultRowNumber;
 
-    public OptionsFragmentModule(String keyDefaultELO) {
+    public OptionsFragmentModule(String keyDefaultELO, String keyDefaultRowNumber) {
         this.keyDefaultELO = keyDefaultELO;
+        this.keyDefaultRowNumber = keyDefaultRowNumber;
     }
 
     @Provides
@@ -48,7 +52,25 @@ public class OptionsFragmentModule {
 
     @Provides
     @OptionsFragmentScopeInterface
+    GetDefaultRowNumberUseCase provideGetDefaultRowNumberUseCase(oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.PreferencesInterface preferences) {
+        return new GetDefaultRowNumberUseCase(preferences);
+    }
+
+    @Provides
+    @OptionsFragmentScopeInterface
+    SetDefaultRowNumberUseCase provideSetDefaultRowNumberUseCase(oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.PreferencesInterface preferences) {
+        return new SetDefaultRowNumberUseCase(preferences);
+    }
+
+    @Provides
+    @OptionsFragmentScopeInterface
     PreferencesInterface providePreferencesInterface(SharedPreferences preferences) {
-        return new PreferencesRepository(preferences, this.keyDefaultELO);
+        return new PreferencesRepository(preferences, this.keyDefaultELO, this.keyDefaultRowNumber);
+    }
+
+    @Provides
+    @OptionsFragmentScopeInterface
+    oob.lolprofile.HomeComponent.Domain.DefaultRowNumber.PreferencesInterface providePreferencesInterfaceRowNumber(SharedPreferences preferences) {
+        return new PreferencesRepository(preferences, this.keyDefaultELO, this.keyDefaultRowNumber);
     }
 }

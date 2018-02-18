@@ -15,6 +15,7 @@ import oob.lolprofile.DetailsComponent.Domain.CounterChampions.CounterChampionRe
 import oob.lolprofile.DetailsComponent.Domain.CounterChampions.GetCounterChampionsByChampionIdUseCase;
 import oob.lolprofile.DetailsComponent.Domain.DefaultELO.GetDefaultELOUseCase;
 import oob.lolprofile.DetailsComponent.Domain.DefaultELO.PreferencesInterface;
+import oob.lolprofile.DetailsComponent.Domain.DefaultRowNumber.GetDefaultRowNumberUseCase;
 import oob.lolprofile.DetailsComponent.Domain.GetAllChampions.ChampionRepositoryInterface;
 import oob.lolprofile.DetailsComponent.Domain.GetAllChampions.GetAllChampionsUseCase;
 import retrofit2.Retrofit;
@@ -24,11 +25,13 @@ public class DetailsActivityModule {
     private DetailsActivityViewInterface view;
     private String apiKey;
     private String keyDefaultELO;
+    private String keyDefaultRowNumber;
 
-    public DetailsActivityModule(DetailsActivityViewInterface view, String apiKey, String keyDefaultELO) {
+    public DetailsActivityModule(DetailsActivityViewInterface view, String apiKey, String keyDefaultELO, String keyDefaultRowNumber) {
         this.view = view;
         this.apiKey = apiKey;
         this.keyDefaultELO = keyDefaultELO;
+        this.keyDefaultRowNumber = keyDefaultRowNumber;
     }
 
     @DetailsActivityScopeInterface
@@ -75,7 +78,19 @@ public class DetailsActivityModule {
 
     @DetailsActivityScopeInterface
     @Provides
+    GetDefaultRowNumberUseCase provideGetDefaultRowNumberUseCase(oob.lolprofile.DetailsComponent.Domain.DefaultRowNumber.PreferencesInterface preferences) {
+        return new GetDefaultRowNumberUseCase(preferences);
+    }
+
+    @DetailsActivityScopeInterface
+    @Provides
     PreferencesInterface providePreferencesInterface(SharedPreferences preferences) {
-        return new PreferencesRepository(preferences, this.keyDefaultELO);
+        return new PreferencesRepository(preferences, this.keyDefaultELO, this.keyDefaultRowNumber);
+    }
+
+    @DetailsActivityScopeInterface
+    @Provides
+    oob.lolprofile.DetailsComponent.Domain.DefaultRowNumber.PreferencesInterface providePreferencesInterfaceRowNumber(SharedPreferences preferences) {
+        return new PreferencesRepository(preferences, this.keyDefaultELO, this.keyDefaultRowNumber);
     }
 }

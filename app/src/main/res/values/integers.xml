@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="cache_size">10485760</integer> <!-- 10MB => 10 * 1024 * 1024 -->
-    <integer name="grid_view_rows_counters">2</integer>
     <integer name="grid_view_columns_counters">3</integer>
 </resources>

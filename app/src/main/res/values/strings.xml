@@ -53,5 +53,9 @@
     <string name="options_dialog_delete_positive_text">Sure</string>
     <string name="options_dialog_delete_negative_text">Nope</string>
     <string name="options_message_data_deleted">All data was deleted</string>
-    <string name="string_elo_key_not_found">NOPE</string>
+    <string name="string_key_not_found">NOPE</string>
+    <string name="options_choose_default_row_number_title">Number of rows (details)</string>
+    <string name="options_choose_row_number_description">Define the number of rows shown in champion\'s detail. As League of Legends has a huge amount of champions, there is no logic reason to show all other champions WR percentage. Rows are limited between 2 and 4 (6 up to 12 champions being shown).</string>
+    <string name="key_default_stored_row_number">defaultRowNumber</string>
+    <string name="row_number_default_key">2</string>
 </resources>

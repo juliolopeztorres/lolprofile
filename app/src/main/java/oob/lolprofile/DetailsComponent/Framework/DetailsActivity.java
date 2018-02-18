@@ -28,6 +28,7 @@ import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.ChampionRol
 import oob.lolprofile.DetailsComponent.Domain.CounterChampions.GetCounterChampionsByChampionIdUseCase;
 import oob.lolprofile.DetailsComponent.Domain.CounterChampions.Model.Counter;
 import oob.lolprofile.DetailsComponent.Domain.DefaultELO.GetDefaultELOUseCase;
+import oob.lolprofile.DetailsComponent.Domain.DefaultRowNumber.GetDefaultRowNumberUseCase;
 import oob.lolprofile.DetailsComponent.Domain.GetAllChampions.GetAllChampionsUseCase;
 import oob.lolprofile.DetailsComponent.Framework.Adapter.ChampionCounterAdapter;
 import oob.lolprofile.DetailsComponent.Framework.DependencyInjection.DaggerDetailsActivityComponentInterface;
@@ -73,6 +74,8 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
     GetDefaultELOUseCase getDefaultELOUseCase;
     @Inject
     GetAllChampionsUseCase getAllChampionsUseCase;
+    @Inject
+    GetDefaultRowNumberUseCase getDefaultRowNumberUseCase;
 
     private int rowCounters;
     private ArrayList<ChampionRoleCounter> championRoleCounters;
@@ -80,6 +83,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
     private Champion championClicked;
     private String[] elo_keys;
     private String defaultELO;
+    private int rowNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +93,13 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
         this.component = DaggerDetailsActivityComponentInterface.builder()
                 .baseApplicationComponentInterface(((BaseApplication) this.getApplication()).getComponent())
-                .detailsActivityModule(new DetailsActivityModule(this, getString(R.string.api_key_champion), getString(R.string.key_default_stored_elo)))
+                .detailsActivityModule(new DetailsActivityModule(this, getString(R.string.api_key_champion), getString(R.string.key_default_stored_elo), getString(R.string.key_default_stored_row_number)))
                 .build();
         this.component.inject(this);
 
         this.elo_keys = getResources().getStringArray(R.array.elo_keys);
         this.defaultELO = this.getDefaultELOUseCase.getDefaultELO();
+        this.rowNumber = this.getDefaultRowNumberUseCase.getDefaultRowNumber();
 
         if (!this.recoverParamsFromBundle()) {
             this.showError(getString(R.string.message_data_not_found_in_bundle));
@@ -215,7 +220,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
     public void showChampions(ArrayList<Champion> champions) {
         this.champions = champions;
 
-        this.rowCounters = getResources().getInteger(R.integer.grid_view_rows_counters) * getResources().getInteger(R.integer.grid_view_columns_counters);
+        this.rowCounters = this.rowNumber * getResources().getInteger(R.integer.grid_view_columns_counters);
         this.tabLayout.addOnTabSelectedListener(this);
         this.setSupportActionBar(this.toolbar);
         this.setBackButton();
