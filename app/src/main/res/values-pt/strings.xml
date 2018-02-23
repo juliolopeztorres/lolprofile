@@ -8,8 +8,8 @@
     <string name="menu_option_label">Opções</string>
     <string name="menu_search_label">Pesquisar</string>
     <string name="transition_champion_details">Transição do campeão</string>
-    <string name="textView_counter_label">Débil contra</string>
-    <string name="textView_goodAgainst_label">Fraco contra</string>
+    <string name="textView_counter_label">Fraco contra</string>
+    <string name="textView_goodAgainst_label">Forte contra</string>
     <string name="textView_lore_label">História</string>
     <string name="menu_details_bronze_label">BRONZE</string>
     <string name="menu_details_silver_label">PRATA</string>
