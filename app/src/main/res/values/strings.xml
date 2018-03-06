@@ -6,7 +6,7 @@
     <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
     <string name="base_url_rito">http://lol.momotoria.es/</string>
-    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/%s</string>
+    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/8.4.1/img/champion/%s</string>
     <string name="base_url_champion_splash">http://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
 
     <!-- TOOLBAR -->
