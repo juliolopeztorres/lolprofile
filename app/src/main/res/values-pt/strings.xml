@@ -35,4 +35,5 @@
     <string name="options_message_data_deleted">Todos os dados foram excluídos!</string>
     <string name="options_choose_default_row_number_title">Número de linhas (detalhes)</string>
     <string name="options_choose_row_number_description">Defina o número de linhas mostradas nos detalhes do campeão. Como a League of Legends tem tantos campeões, não faz sentido mostrar todas as taxas de vitória dos oponentes. As linhas são limitadas entre 2 e 4 (de 6 a 12 campeões mostrados).</string>
+    <string name="menu_order_label">Ordem</string>
 </resources>

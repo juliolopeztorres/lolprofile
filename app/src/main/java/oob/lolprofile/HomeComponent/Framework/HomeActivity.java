@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import oob.lolprofile.DetailsComponent.Framework.DetailsActivity;
@@ -23,7 +22,7 @@ import oob.lolprofile.HomeComponent.Framework.Fragment.Champion.ChampionsFragmen
 import oob.lolprofile.HomeComponent.Framework.Fragment.Option.OptionsFragment;
 import oob.lolprofile.R;
 
-public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener, ChampionAdapter.OnChampionEvents {
+public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener, ChampionAdapter.OnChampionEvents, MenuItem.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -35,9 +34,12 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     NavigationView navigationView;
 
     SearchView viewSearch;
+    MenuItem orderChampsMenuItem;
+    MenuItem viewSearchMenuItem;
 
     private ChampionsFragment championsFragment = new ChampionsFragment();
     private OptionsFragment optionsFragment = new OptionsFragment();
+    private boolean orderingAscending = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +68,12 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        MenuItem menuItemSearch = menu.findItem(R.id.search);
-        this.viewSearch = (SearchView) menuItemSearch.getActionView();
+        this.viewSearchMenuItem = menu.findItem(R.id.search);
+        this.viewSearch = (SearchView) this.viewSearchMenuItem.getActionView();
         this.viewSearch.setOnQueryTextListener(this);
+
+        this.orderChampsMenuItem = menu.findItem(R.id.order);
+        this.orderChampsMenuItem.setOnMenuItemClickListener(this);
 
         return true;
     }
@@ -103,7 +108,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String champName) {
-        this.championsFragment.filterChampsByName(champName);
+        this.championsFragment.filterChampsByName(champName, orderingAscending);
         return true;
     }
 
@@ -120,12 +125,16 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private Fragment getFragment(int itemId) {
         this.drawerLayout.closeDrawers();
-        this.viewSearch.setVisibility(View.GONE);
+        this.viewSearchMenuItem.setVisible(false);
+        this.orderChampsMenuItem.setVisible(false);
         switch (itemId) {
             case R.id.menu_champions:
                 this.viewSearch.setQuery("", false);
                 this.viewSearch.clearFocus();
-                this.viewSearch.setVisibility(View.VISIBLE);
+                this.viewSearchMenuItem.setVisible(true);
+                this.orderChampsMenuItem.setVisible(true);
+                this.orderChampsMenuItem.setIcon(R.drawable.ic_order_down);
+                this.orderingAscending = true;
                 return this.championsFragment;
             case R.id.menu_options:
                 return this.optionsFragment;
@@ -144,5 +153,18 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);
         it.putExtras(bundle);
         startActivity(it);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        this.orderingAscending = !this.orderingAscending;
+        if (this.orderingAscending) {
+            this.orderChampsMenuItem.setIcon(R.drawable.ic_order_down);
+        } else {
+            this.orderChampsMenuItem.setIcon(R.drawable.ic_order_up);
+        }
+
+        this.championsFragment.orderChampions();
+        return false;
     }
 }

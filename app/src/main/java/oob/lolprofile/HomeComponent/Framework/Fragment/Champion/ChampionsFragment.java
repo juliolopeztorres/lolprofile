@@ -3,6 +3,7 @@ package oob.lolprofile.HomeComponent.Framework.Fragment.Champion;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,7 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_champions, container, false);
         this.context = view.getContext();
@@ -107,11 +108,11 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
         this.showError(getString(R.string.message_data_not_found_in_server));
     }
 
-    public void filterChampsByName(String champName) {
+    public void filterChampsByName(String champName, boolean orderingAscending) {
         if (this.championAdapter == null) {
             this.getAllChampionsUseCase.getAll();
         } else {
-            this.championAdapter.filterByName(champName);
+            this.championAdapter.filterByName(champName, orderingAscending);
         }
     }
 
@@ -125,5 +126,9 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
         this.progressBar.setVisibility(View.GONE);
         this.imageViewSadFace.setVisibility(View.GONE);
         this.gridView.setVisibility(View.VISIBLE);
+    }
+
+    public void orderChampions() {
+        this.championAdapter.reverseOrderChampions();
     }
 }

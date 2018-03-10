@@ -65,7 +65,7 @@ public class ChampionRepository implements ChampionRepositoryInterface {
                 championDBRepository.setAll(
                         ChampionCollectionMapper.parseChampionsToRealm(champions)
                 );
-                callback.onSuccess(champions);
+                getAll(callback);
             }
 
             @Override
