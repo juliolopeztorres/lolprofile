@@ -60,7 +60,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void setHomeButton() {
         ActionBar actionBar = this.getSupportActionBar();
-        assert actionBar != null;
+
+        if (actionBar == null) {
+            return;
+        }
         actionBar.setHomeAsUpIndicator(R.drawable.ic_home);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -91,7 +94,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     private void updateFragmentView(MenuItem item, Fragment fragment) {
         this.getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayoutMainContent, fragment).commit();
         ActionBar actionBar = this.getSupportActionBar();
-        assert actionBar != null;
+
+        if (actionBar == null) {
+            return;
+        }
         actionBar.setTitle(item.getTitle());
         item.setChecked(true);
         this.drawerLayout.closeDrawers();

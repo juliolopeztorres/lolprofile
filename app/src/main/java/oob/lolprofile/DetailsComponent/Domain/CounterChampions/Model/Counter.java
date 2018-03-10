@@ -40,12 +40,25 @@ public class Counter implements Comparable {
         return (((Counter) o).winRate - this.winRate > 0 ? 1 : -1);
     }
 
-    public static ArrayList<Counter> filter(ArrayList<Counter> counters, int beginning, int ending) {
-        if (counters.size() > (ending - beginning)) {
-            counters = new ArrayList<>(counters.subList(beginning, ending));
+    public static ArrayList<Counter> filter(ArrayList<Counter> counters, int beginning, int ending, boolean goodAgainst) {
+        if (counters.size() < (ending - beginning)) {
+            beginning = 0;
+            ending = counters.size();
         }
 
-        return counters;
+        ArrayList<Counter> countersResult = new ArrayList<>();
+        for (int i = beginning; i < ending; i++) {
+            Counter counter = counters.get(i);
+            if (includeCounterByWinRate(counter.getWinRate(), goodAgainst)) {
+                countersResult.add(counter);
+            }
+        }
+
+        return countersResult;
+    }
+
+    private static boolean includeCounterByWinRate(double winRate, boolean goodAgainst) {
+        return goodAgainst ? winRate < 0.5 : winRate > 0.5;
     }
 
     public static ArrayList<Counter> getCountersFilteredById(ArrayList<Counter> counters, int champId) {

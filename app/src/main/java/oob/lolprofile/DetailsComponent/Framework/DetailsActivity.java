@@ -67,6 +67,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
     TextView textViewChampionWinRate;
     @BindView(R.id.textViewChampionWinGames)
     TextView textViewChampionWinGames;
+    @BindView(R.id.textViewNoBadAgainstChampInfo)
+    TextView textViewNoBadAgainstChampInfo;
+    @BindView(R.id.textViewNoGoodAgainstChampInfo)
+    TextView textViewNoGoodAgainstChampInfo;
 
     @Inject
     GetCounterChampionsByChampionIdUseCase getCounterChampionsByChampionIdUseCase;
@@ -137,7 +141,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
     private void setBackButton() {
         ActionBar actionBar = this.getSupportActionBar();
-        assert actionBar != null;
+
+        if (actionBar == null) {
+            return;
+        }
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -239,27 +246,19 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
     }
 
     private void setTabLabels(ArrayList<String> tabLabels) {
-        if (this.tabLayout.getTabCount() > 0 && this.tabLayout.getTabCount() == tabLabels.size()) {
-            TabLayout.Tab tabSelected = this.tabLayout.getTabAt(this.tabLayout.getSelectedTabPosition());
-            assert tabSelected != null;
-
-            String rol = RoleNamesParser.getChampionAPIKey(tabSelected.getText() != null ? tabSelected.getText().toString() : "");
-            this.showCounters(rol);
-            this.setChampionStats(rol);
-        } else {
-            this.tabLayout.removeAllTabs();
-
-            for (String tabLabel : tabLabels) {
-                TabLayout.Tab tab = this.tabLayout.newTab();
-                tab.setText(tabLabel);
-                this.tabLayout.addTab(tab);
-            }
+        this.tabLayout.removeAllTabs();
+        for (String tabLabel : tabLabels) {
+            TabLayout.Tab tab = this.tabLayout.newTab();
+            tab.setText(tabLabel);
+            this.tabLayout.addTab(tab);
         }
     }
 
     private void setChampionStats(String role) {
         ChampionRoleCounter championRoleCounter = ChampionRoleCounter.getStatsByRole(this.championRoleCounters, role);
-        assert championRoleCounter != null;
+        if (championRoleCounter == null) {
+            return;
+        }
         this.textViewChampionKDA.setText(
                 String.format(
                         getString(R.string.champion_kda),
@@ -283,12 +282,28 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
     public void showCounters(String role) {
         ArrayList<Counter> championCounters = ChampionRoleCounter.getCountersByRole(this.championRoleCounters, role, this.championClicked.getId());
-        assert championCounters != null;
-        this.showChampionsInGrid(Counter.filter(championCounters, 0, rowCounters), this.gridViewCounterChampions);
+        if (championCounters == null) {
+            championCounters = new ArrayList<>();
+        }
 
-        ArrayList<Counter> championGoodAgainstFiltered = Counter.filter(championCounters, championCounters.size() - rowCounters, championCounters.size());
+        ArrayList<Counter> championBadAgainstFiltered = Counter.filter(championCounters, 0, rowCounters, false);
+        this.showChampionsInGrid(championBadAgainstFiltered, this.gridViewCounterChampions);
+
+        ArrayList<Counter> championGoodAgainstFiltered = Counter.filter(championCounters, championCounters.size() - rowCounters, championCounters.size(), true);
         Collections.reverse(championGoodAgainstFiltered);
         this.showChampionsInGrid(championGoodAgainstFiltered, this.gridViewGoodAgainstChampions);
+
+        this.textViewNoBadAgainstChampInfo.setVisibility(View.GONE);
+        if (championBadAgainstFiltered.isEmpty()) {
+            this.textViewNoBadAgainstChampInfo.setText(String.format(getString(R.string.textView_noInfo_badAgainst), this.championClicked.getName()));
+            this.textViewNoBadAgainstChampInfo.setVisibility(View.VISIBLE);
+        }
+
+        this.textViewNoGoodAgainstChampInfo.setVisibility(View.GONE);
+        if (championGoodAgainstFiltered.isEmpty()) {
+            this.textViewNoGoodAgainstChampInfo.setText(String.format(getString(R.string.textView_noInfo_goodAgainst), this.championClicked.getName()));
+            this.textViewNoGoodAgainstChampInfo.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showChampionsInGrid(ArrayList<Counter> championsToShow, ExpandableHeightGridView gridView) {

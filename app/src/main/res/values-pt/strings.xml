@@ -36,4 +36,6 @@
     <string name="options_choose_default_row_number_title">Número de linhas (detalhes)</string>
     <string name="options_choose_row_number_description">Defina o número de linhas mostradas nos detalhes do campeão. Como a League of Legends tem tantos campeões, não faz sentido mostrar todas as taxas de vitória dos oponentes. As linhas são limitadas entre 2 e 4 (de 6 a 12 campeões mostrados).</string>
     <string name="menu_order_label">Ordem</string>
+    <string name="textView_noInfo_badAgainst">Não há informações públicas sobre a API Champion.gg contra o que os campeões são fracos %s :(</string>
+    <string name="textView_noInfo_goodAgainst">Não há informações públicas sobre a API Champion.gg contra o que os campeões são fortes %s :(</string>
 </resources>

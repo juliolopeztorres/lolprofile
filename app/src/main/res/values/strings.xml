@@ -59,4 +59,6 @@
     <string name="key_default_stored_row_number">defaultRowNumber</string>
     <string name="row_number_default_key">2</string>
     <string name="menu_order_label">Order</string>
+    <string name="textView_noInfo_badAgainst">There is no public information on Champion.gg API about which champions are strong against %s :(</string>
+    <string name="textView_noInfo_goodAgainst">There is no public information on Champion.gg API about which champions are weak against %s :(</string>
 </resources>
