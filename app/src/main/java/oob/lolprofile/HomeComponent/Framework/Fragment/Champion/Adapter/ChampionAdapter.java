@@ -12,6 +12,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 import oob.lolprofile.R;
@@ -84,23 +85,30 @@ public class ChampionAdapter extends BaseAdapter {
     private ChampionViewHolder createViewHolder(View view) {
         return (new ChampionViewHolder())
                 .setChampionAvatar((RoundedImageView) view.findViewById(R.id.roundImageViewChampionAvatar))
-                .setTextViewChampionName((TextView) view.findViewById(R.id.textViewAllChampionName))
-                ;
+                .setTextViewChampionName((TextView) view.findViewById(R.id.textViewAllChampionName));
     }
 
-    public void filterByName(String champName) {
+    public void filterByName(String champName, boolean orderingAscending) {
         this.championsFiltered.clear();
 
         if (TextUtils.isEmpty(champName)) {
             this.championsFiltered.addAll(this.champions);
+            if (!orderingAscending) {
+                this.reverseOrderChampions();
+            }
         } else {
             for(Champion champion: this.champions) {
-                if (champion.getName().toLowerCase().contains(champName.toLowerCase())) {
+                if (champion.getKey().toLowerCase().contains(champName.toLowerCase())) {
                     this.championsFiltered.add(champion);
                 }
             }
         }
 
+        this.notifyDataSetChanged();
+    }
+
+    public void reverseOrderChampions() {
+        Collections.reverse(this.championsFiltered);
         this.notifyDataSetChanged();
     }
 

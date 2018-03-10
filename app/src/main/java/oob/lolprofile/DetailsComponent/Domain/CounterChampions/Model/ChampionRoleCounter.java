@@ -128,10 +128,20 @@ public class ChampionRoleCounter {
     public static ArrayList<String> getChampRoles(ArrayList<ChampionRoleCounter> championRoleCounters) {
         ArrayList<String> roles = new ArrayList<>();
         for(ChampionRoleCounter championRoleCounter: championRoleCounters) {
-            roles.add(RoleNamesParser.parse(championRoleCounter.getRole()));
+            if (hasCounterInformation(championRoleCounter.getRoleCounters())) {
+                roles.add(RoleNamesParser.parse(championRoleCounter.getRole()));
+            }
         }
-
         return roles;
+    }
+
+    private static boolean hasCounterInformation(ArrayList<RoleCounter> roleCounters) {
+        for (RoleCounter roleCounter: roleCounters) {
+            if (!roleCounter.getCounters().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static ArrayList<Counter> getCountersByRole(ArrayList<ChampionRoleCounter> championRoleCounters, String role, int championId) {

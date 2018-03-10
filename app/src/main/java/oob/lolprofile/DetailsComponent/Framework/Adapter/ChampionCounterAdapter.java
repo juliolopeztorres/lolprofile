@@ -56,7 +56,10 @@ public class ChampionCounterAdapter extends BaseAdapter {
         Counter counter = this.counters.get(i);
         final Champion champion = Champion.findById(this.champions, counter.getId());
 
-        assert champion != null;
+        if (champion == null) {
+            return view;
+        }
+
         Picasso.with(this.context)
                 .load(String.format(this.context.getString(R.string.base_url_champion_image), champion.getImage()))
                 .placeholder(R.drawable.champion_placeholder)

@@ -6,4 +6,8 @@
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView" />
+    <item android:id="@+id/order"
+        android:title="@string/menu_order_label"
+        android:icon="@drawable/ic_order_down"
+        app:showAsAction="always"/>
 </menu>

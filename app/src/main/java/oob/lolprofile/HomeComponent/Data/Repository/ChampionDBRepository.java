@@ -18,7 +18,7 @@ public class ChampionDBRepository implements ChampionDBInterface {
     }
 
     RealmResults<ChampionRow> getAll() throws NoChampionsFoundDBException {
-        RealmResults<ChampionRow> championRows = this.realm.where(ChampionRow.class).findAll();
+        RealmResults<ChampionRow> championRows = this.realm.where(ChampionRow.class).sort("key").findAll();
         if (championRows.size() == 0) {
             throw new NoChampionsFoundDBException();
         }
