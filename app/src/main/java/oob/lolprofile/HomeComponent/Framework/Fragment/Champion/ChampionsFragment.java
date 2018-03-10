@@ -110,10 +110,9 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
 
     public void filterChampsByName(String champName, boolean orderingAscending) {
         if (this.championAdapter == null) {
-            this.getAllChampionsUseCase.getAll();
-        } else {
-            this.championAdapter.filterByName(champName, orderingAscending);
+            return;
         }
+        this.championAdapter.filterByName(champName, orderingAscending);
     }
 
     public void showLoading() {
@@ -129,6 +128,9 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
     }
 
     public void orderChampions() {
+        if (this.championAdapter == null) {
+            return;
+        }
         this.championAdapter.reverseOrderChampions();
     }
 }
