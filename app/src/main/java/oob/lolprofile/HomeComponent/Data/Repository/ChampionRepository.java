@@ -41,7 +41,6 @@ public class ChampionRepository implements ChampionRepositoryInterface {
             );
         } catch (NoChampionsFoundDBException e) {
             this.requestChampions(callback);
-
         }
     }
 
@@ -49,7 +48,7 @@ public class ChampionRepository implements ChampionRepositoryInterface {
         Call<ArrayList<Champion>> serviceCall = this.championClientInterface.getAll(
                 this.locale,
                 true,
-                new String[]{"image", "lore", "skins"},
+                new String[]{"image", "lore", "skins", "enemytips", "allytips"},
                 this.apiKey
         );
 

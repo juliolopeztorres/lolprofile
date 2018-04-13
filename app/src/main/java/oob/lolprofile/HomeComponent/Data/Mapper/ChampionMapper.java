@@ -1,6 +1,9 @@
 package oob.lolprofile.HomeComponent.Data.Mapper;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import javax.annotation.Nullable;
 
 import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
 import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
@@ -19,7 +22,18 @@ class ChampionMapper {
                 .setSkins(SkinCollectionMapper.parseSkins(championResponse.getAsJsonArray("skins")))
         ;
 
+        champion.setAllyTips(getTips(championResponse.getAsJsonArray("allytips")));
+        champion.setEnemyTips(getTips(championResponse.getAsJsonArray("enemytips")));
+
         return champion;
+    }
+
+    private static ArrayList<String> getTips(@Nullable JsonArray tips) {
+        if (tips == null) {
+            return new ArrayList<>();
+        }
+
+        return TipCollectionMapper.parseTips(tips);
     }
 
     static Champion parseChampionRealmResponse(ChampionRow championRow) {
@@ -33,6 +47,8 @@ class ChampionMapper {
                 .setName(championRow.getName())
                 .setTitle(championRow.getTitle())
                 .setSkins(SkinCollectionMapper.parseSkinsRealm(championRow.getSkins()))
+                .setAllyTips(TipCollectionMapper.parseTipsRealm(championRow.getAllyTips()))
+                .setEnemyTips(TipCollectionMapper.parseTipsRealm(championRow.getEnemyTips()))
         ;
 
         return champion;
@@ -49,6 +65,8 @@ class ChampionMapper {
                 .setName(champion.getName())
                 .setTitle(champion.getTitle())
                 .setSkins(SkinCollectionMapper.parseSkinsToRealm(champion.getSkins()))
+                .setAllyTips(TipCollectionMapper.parseTipsToRealm(champion.getAllyTips()))
+                .setEnemyTips(TipCollectionMapper.parseTipsToRealm(champion.getEnemyTips()))
         ;
 
         return championRow;

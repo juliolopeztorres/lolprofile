@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.logging.HttpLoggingInterceptor;
+import oob.lolprofile.BuildConfig;
 import timber.log.Timber;
 
 @Module
@@ -19,7 +20,10 @@ public class LogModule {
                 Timber.i(message);
             }
         });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        if (BuildConfig.DEBUG) {
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        }
 
         return httpLoggingInterceptor;
     }

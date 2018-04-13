@@ -19,6 +19,10 @@ public class ChampionRow extends RealmObject {
     private String image;
     @Required
     private RealmList<SkinRow> skins;
+    @Required
+    private RealmList<String> allyTips;
+    @Required
+    private RealmList<String> enemyTips;
 
     public int getId() {
         return id;
@@ -80,6 +84,24 @@ public class ChampionRow extends RealmObject {
 
     public ChampionRow setSkins(RealmList<SkinRow> skins) {
         this.skins = skins;
+        return this;
+    }
+
+    public RealmList<String> getAllyTips() {
+        return allyTips;
+    }
+
+    public ChampionRow setAllyTips(RealmList<String> allyTips) {
+        this.allyTips = allyTips;
+        return this;
+    }
+
+    public RealmList<String> getEnemyTips() {
+        return enemyTips;
+    }
+
+    public ChampionRow setEnemyTips(RealmList<String> enemyTips) {
+        this.enemyTips = enemyTips;
         return this;
     }
 }
