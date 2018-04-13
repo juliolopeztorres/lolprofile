@@ -115,6 +115,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
         if (!this.recoverParamsFromBundle()) {
             this.showError(getString(R.string.message_data_not_found_in_bundle));
+            this.finish();
             return;
         }
 
@@ -129,7 +130,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
         }
         this.championClicked = ((Champion) bundle.getSerializable(KEY_CHAMPION_CLICKED));
 
-        return true;
+        return this.championClicked != null;
     }
 
     @Override
