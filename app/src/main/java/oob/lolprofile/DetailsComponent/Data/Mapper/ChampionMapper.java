@@ -15,6 +15,8 @@ class ChampionMapper {
                 .setName(championRow.getName())
                 .setTitle(championRow.getTitle())
                 .setSkins(SkinCollectionMapper.parseSkinsRealm(championRow.getSkins()))
+                .setAllyTips(TipCollectionMapper.parseTipsRealm(championRow.getAllyTips()))
+                .setEnemyTips(TipCollectionMapper.parseTipsRealm(championRow.getEnemyTips()))
         ;
 
         return champion;

@@ -11,6 +11,8 @@ public class Champion implements Serializable {
     private String lore;
     private String image;
     private ArrayList<Skin> skins;
+    private ArrayList<String> allyTips;
+    private ArrayList<String> enemyTips;
 
     public int getId() {
         return id;
@@ -72,6 +74,24 @@ public class Champion implements Serializable {
 
     public Champion setSkins(ArrayList<Skin> skins) {
         this.skins = skins;
+        return this;
+    }
+
+    public ArrayList<String> getAllyTips() {
+        return allyTips;
+    }
+
+    public Champion setAllyTips(ArrayList<String> allyTips) {
+        this.allyTips = allyTips;
+        return this;
+    }
+
+    public ArrayList<String> getEnemyTips() {
+        return enemyTips;
+    }
+
+    public Champion setEnemyTips(ArrayList<String> enemyTips) {
+        this.enemyTips = enemyTips;
         return this;
     }
 
