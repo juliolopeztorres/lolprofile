@@ -5,9 +5,9 @@
     <string name="cache_name">CacheLoLProfile</string>
     <string name="shared_preferences_name">SharedPreferencesLoLProfile</string>
     <string name="base_url_champion_gg">http://api.champion.gg/v2/</string>
-    <string name="base_url_rito">http://lol.momotoria.es/</string>
-    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/8.5.2/img/champion/%s</string>
-    <string name="base_url_champion_splash">http://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
+    <string name="base_url_rito">https://lol.momotoria.es/</string>
+    <string name="base_url_champion_image">https://ddragon.leagueoflegends.com/cdn/8.7.1/img/champion/%s</string>
+    <string name="base_url_champion_splash">https://ddragon.leagueoflegends.com/cdn/img/champion/splash/%s_%s.jpg</string>
 
     <!-- TOOLBAR -->
     <string name="toolbar_elevation">4dp</string>
@@ -61,4 +61,5 @@
     <string name="menu_order_label">Order</string>
     <string name="textView_noInfo_badAgainst">There is no public information on Champion.gg API about which champions are strong against %s :(</string>
     <string name="textView_noInfo_goodAgainst">There is no public information on Champion.gg API about which champions are weak against %s :(</string>
+    <string name="textViewTipsLabel">Tips:</string>
 </resources>
