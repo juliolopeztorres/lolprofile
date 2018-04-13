@@ -38,4 +38,5 @@
     <string name="menu_order_label">Ordem</string>
     <string name="textView_noInfo_badAgainst">Não há informações públicas sobre a API Champion.gg contra o que os campeões são fracos %s :(</string>
     <string name="textView_noInfo_goodAgainst">Não há informações públicas sobre a API Champion.gg contra o que os campeões são fortes %s :(</string>
+    <string name="textViewTipsLabel">Conselhos:</string>
 </resources>

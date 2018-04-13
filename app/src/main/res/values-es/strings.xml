@@ -38,4 +38,5 @@
     <string name="menu_order_label">Ordenar</string>
     <string name="textView_noInfo_badAgainst">No hay información pública de la API de Champion.gg sobre contra qué campeones es débil %s :(</string>
     <string name="textView_noInfo_goodAgainst">No hay información pública de la API de Champion.gg sobre contra qué campeones es fuerte %s :(</string>
+    <string name="textViewTipsLabel">Consejos:</string>
 </resources>
