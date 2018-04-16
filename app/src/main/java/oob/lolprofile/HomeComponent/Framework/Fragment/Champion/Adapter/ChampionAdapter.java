@@ -98,7 +98,8 @@ public class ChampionAdapter extends BaseAdapter {
             }
         } else {
             for(Champion champion: this.champions) {
-                if (champion.getKey().toLowerCase().contains(champName.toLowerCase())) {
+                if (champion.getKey().toLowerCase().contains(champName.toLowerCase()) ||
+                        champion.getName().toLowerCase().contains(champName.toLowerCase())) {
                     this.championsFiltered.add(champion);
                 }
             }
