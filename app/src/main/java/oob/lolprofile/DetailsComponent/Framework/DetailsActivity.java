@@ -71,6 +71,14 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
     TextView textViewNoBadAgainstChampInfo;
     @BindView(R.id.textViewNoGoodAgainstChampInfo)
     TextView textViewNoGoodAgainstChampInfo;
+    @BindView(R.id.textViewEnemyTips)
+    TextView textViewEnemyTips;
+    @BindView(R.id.textViewAllyTips)
+    TextView textViewAllyTips;
+    @BindView(R.id.textViewEnemyTipsLabel)
+    TextView textViewEnemyTipsLabel;
+    @BindView(R.id.textViewAllyTipsLabel)
+    TextView textViewAllyTipsLabel;
 
     @Inject
     GetCounterChampionsByChampionIdUseCase getCounterChampionsByChampionIdUseCase;
@@ -107,6 +115,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
         if (!this.recoverParamsFromBundle()) {
             this.showError(getString(R.string.message_data_not_found_in_bundle));
+            this.finish();
             return;
         }
 
@@ -121,7 +130,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
         }
         this.championClicked = ((Champion) bundle.getSerializable(KEY_CHAMPION_CLICKED));
 
-        return true;
+        return this.championClicked != null;
     }
 
     @Override
@@ -193,10 +202,30 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
 
         this.textViewChampionDescription.setText(this.ucword(this.championClicked.getTitle()));
         this.textViewLore.setText(this.championClicked.getLore());
+        this.textViewEnemyTips.setText(this.implode(this.championClicked.getEnemyTips(), " "));
+        this.textViewAllyTips.setText(this.implode(this.championClicked.getAllyTips(), " "));
+
+        if (this.textViewEnemyTips.getText().toString().isEmpty()) {
+            this.textViewEnemyTipsLabel.setVisibility(View.GONE);
+        }
+
+        if (this.textViewAllyTips.getText().toString().isEmpty()) {
+            this.textViewAllyTipsLabel.setVisibility(View.GONE);
+        }
     }
 
     private String ucword(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
+    }
+
+    private String implode(ArrayList<String> arrayList, String glue) {
+        StringBuilder result = new StringBuilder();
+
+        for(String part: arrayList) {
+            result.append(part).append(glue);
+        }
+
+        return result.toString();
     }
 
     private void setChampionSplash() {

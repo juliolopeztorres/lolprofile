@@ -68,6 +68,21 @@
                 android:visibility="gone"
                 />
 
+            <TextView
+                android:id="@+id/textViewEnemyTipsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewTipsLabel"
+                />
+
+            <TextView
+                android:id="@+id/textViewEnemyTips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -103,6 +118,21 @@
                 android:layout_marginBottom="20dp"
                 android:visibility="gone"
                 />
+
+            <TextView
+                android:id="@+id/textViewAllyTipsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewTipsLabel"
+                />
+
+            <TextView
+                android:id="@+id/textViewAllyTips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp" />
 
             <View
                 android:layout_width="match_parent"
