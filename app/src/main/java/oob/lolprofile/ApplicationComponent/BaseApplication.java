@@ -37,23 +37,15 @@ public class BaseApplication extends Application {
                 .preferencesModule(new PreferencesModule(this, getString(R.string.shared_preferences_name)))
                 .build();
 
-        this.setDefaultELO();
-        this.setDefaultRowNumber();
+        this.setDefaultValueForKey(getString(R.string.elo_default_key), getString(R.string.key_default_stored_elo));
+        this.setDefaultValueForKey(getString(R.string.row_number_default_key), getString(R.string.key_default_stored_row_number));
     }
 
-    private void setDefaultELO() {
+    private void setDefaultValueForKey(String defaultValue, String key) {
         SharedPreferences sharedPreferences = this.component.getPreferences();
-        String defaultELO = sharedPreferences.getString(getString(R.string.key_default_stored_elo), "");
-        if (defaultELO.isEmpty()) {
-            sharedPreferences.edit().putString(getString(R.string.key_default_stored_elo), getString(R.string.elo_default_key)).apply();
-        }
-    }
-
-    private void setDefaultRowNumber() {
-        SharedPreferences sharedPreferences = this.component.getPreferences();
-        String defaultRowNumber = sharedPreferences.getString(getString(R.string.key_default_stored_row_number), "");
-        if (defaultRowNumber.isEmpty()) {
-            sharedPreferences.edit().putString(getString(R.string.key_default_stored_row_number), getString(R.string.row_number_default_key)).apply();
+        String value = sharedPreferences.getString(key, getString(R.string.string_key_not_found));
+        if (value.equals(getString(R.string.string_key_not_found))) {
+            sharedPreferences.edit().putString(key, defaultValue).apply();
         }
     }
 
