@@ -153,7 +153,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public void onClick(Champion championClicked) {
-        this.championsFragment.showLoading();
         Intent it = new Intent(this, DetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(DetailsActivity.KEY_CHAMPION_CLICKED, championClicked);

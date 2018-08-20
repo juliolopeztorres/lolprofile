@@ -79,14 +79,9 @@ public class ChampionsFragment extends Fragment implements ViewInterface {
                 .build();
         this.component.inject(this);
 
+        this.showLoading();
         this.getAllChampionsUseCase.getAll();
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.hideLoading();
     }
 
     @Override
