@@ -20,8 +20,8 @@ android {
 
 dependencies {
     // Dagger
-    implementation 'com.google.dagger:dagger:2.8'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+    implementation 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 
     // Network
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
