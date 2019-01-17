@@ -13,6 +13,6 @@ public class ChampionResponseMapper implements JsonDeserializer<ArrayList<Champi
 
     @Override
     public ArrayList<Champion> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return ChampionCollectionMapper.parseChampionsResponse(((JsonObject) json).getAsJsonObject("data"));
+        return ChampionCollectionMapper.parseChampionsResponse(((JsonObject) json).getAsJsonArray("data"));
     }
 }
