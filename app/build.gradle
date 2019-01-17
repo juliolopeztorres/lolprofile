@@ -6,8 +6,8 @@ android {
         applicationId "oob.lolprofile"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 70
-        versionName "0.7.0"
+        versionCode 80
+        versionName "0.8.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

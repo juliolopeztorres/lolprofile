@@ -22,8 +22,8 @@ class ChampionMapper {
                 .setSkins(SkinCollectionMapper.parseSkins(championResponse.getAsJsonArray("skins")))
         ;
 
-        champion.setAllyTips(getTips(championResponse.getAsJsonArray("allytips")));
-        champion.setEnemyTips(getTips(championResponse.getAsJsonArray("enemytips")));
+        champion.setAllyTips(getTips(championResponse.getAsJsonArray("allyTips")));
+        champion.setEnemyTips(getTips(championResponse.getAsJsonArray("enemyTips")));
 
         return champion;
     }

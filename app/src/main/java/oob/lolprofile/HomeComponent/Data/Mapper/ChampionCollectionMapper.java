@@ -1,21 +1,20 @@
 package oob.lolprofile.HomeComponent.Data.Mapper;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import io.realm.RealmResults;
 import oob.lolprofile.HomeComponent.Data.Model.ChampionRow;
 import oob.lolprofile.HomeComponent.Domain.GetAllChampions.Model.Champion;
 
 public class ChampionCollectionMapper {
-    static ArrayList<Champion> parseChampionsResponse(JsonObject ritoChampionResponse) {
+    static ArrayList<Champion> parseChampionsResponse(JsonArray ritoChampionResponse) {
         ArrayList<Champion> champions = new ArrayList<>();
 
-        for (Map.Entry<String, JsonElement> championsResponse : ritoChampionResponse.entrySet()) {
-            champions.add(ChampionMapper.parseChampionResponse(championsResponse.getValue().getAsJsonObject()));
+        for (JsonElement jsonElement : ritoChampionResponse) {
+            champions.add(ChampionMapper.parseChampionResponse(jsonElement.getAsJsonObject()));
         }
 
         return champions;
