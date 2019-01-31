@@ -299,7 +299,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsActivit
         this.textViewChampionKDA.setVisibility(View.VISIBLE);
 
         this.textViewChampionWinRate.setText(
-                String.format(getString(R.string.champion_win_rate), DoubleOperation.roundDoubleToString(championRoleCounter.getWinRate(), 2))
+                String.format(getString(R.string.champion_win_rate), DoubleOperation.roundDoubleToString(championRoleCounter.getWinRate(), 1, true))
         );
         this.textViewChampionWinRate.setVisibility(View.VISIBLE);
 

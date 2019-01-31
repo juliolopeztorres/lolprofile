@@ -78,7 +78,7 @@ public class ChampionCounterAdapter extends BaseAdapter {
         championViewHolder.getTextViewChampionWinRateWins().setText(
                 String.format(
                         this.context.getResources().getString(R.string.counter_champion_rate_wins),
-                        DoubleOperation.roundDoubleToString(counter.getWinRate(), 1),
+                        DoubleOperation.roundDoubleToString(counter.getWinRate(), 1, true),
                         String.valueOf(counter.getWins())
                 )
         );
